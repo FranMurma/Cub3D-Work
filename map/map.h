@@ -6,13 +6,13 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:46:20 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/14 19:30:03 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/15 20:11:18 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_H
 # define MAP_H
-# define BUFFER_SIZE 1
+# define BUFFER_SIZE 1000000
 # define TAB_SPACES 4
 
 # include <stdio.h>
@@ -32,6 +32,7 @@ typedef struct s_map
 	int		max_width;
 	int		map_start;
 	int		map_end;
+	bool	found_map;
 }	t_map;
 
 //check parameters
@@ -50,7 +51,7 @@ void    copy_line_to_map(t_map *map);
 // read_map.c
 bool    is_empty_or_spaces(char *line);
 void    process_map_line(t_map *map, char *line, int *line_number);
-int 	set_measures_and_close(t_map *map, int line_number, int fd);
+void 	set_measures_and_close(t_map *map, int line_number, int fd);
 void 	ft_read_map(char** argv, t_map *map);
 void    print_filled_map(t_map *map);
 
@@ -95,5 +96,8 @@ char    *ft_substr_m(char const *s, unsigned int start, size_t len);
 
 //split
 char		**ft_split(char const *s, char c);
+
+//exit_map.c
+void    free_init_map(t_map *map);
 
 # endif

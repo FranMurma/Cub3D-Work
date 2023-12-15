@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:25:22 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/14 18:03:25 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/15 20:10:38 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,19 @@ void	ft_start_map(char **argv)
 {
 	t_map	*map;
 	map	= init_map();
-	t_textures *texture;
+	ft_read_map(argv, map);
+	
+/*	t_textures *texture;
 	texture = init_textures();
 	t_player *player;
 	player = init_player();
 	t_map_color *color;
 	color = init_color();
-	ft_read_map(argv, map);
 	create_2d(map);
-//	print_filled_map(map);
+	print_filled_map(map);
 	copy_line_to_map(map);
 	get_player(map, player);
-//	print_filled_map(map);
+	print_filled_map(map);
 	ft_read_textures(argv, texture);
     // Procesar y mostrar información de texturas
     process_texture_raw(texture);
@@ -84,5 +85,5 @@ void	ft_start_map(char **argv)
 //    printf("Ceil: %s\n", texture->paths->ceil);
 	get_color_floor(color, texture);
 	get_color_ceil(color, texture);
-	ft_check_color(color);
+	ft_check_color(color);*/
 }

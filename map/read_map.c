@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:27:50 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/09 19:48:09 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/15 20:22:46 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,38 +26,48 @@ bool	is_empty_or_spaces(char *line)
 
 void	process_map_line(t_map *map, char *line, int *line_number)
 {
-	static int	found_content = 0;
-	static int  found_void = 0;
-
-	if (!map->map_raw && is_valid_map_line(line, map))
+	if (!map->map_raw)
 	{
-		map->map_raw = ft_strdup(line);
-		map->map_start = *line_number;
-		found_content = 1;
+		if (is_valid_map_line(line, map) && !(is_empty_or_spaces(line)))
+		{
+			map->found_map = true;
+			map->map_raw = ft_strdup(line);
+			map->map_start = *line_number;
+		}
+		else
+			map->found_map = false;
 	}
-	else if (map->map_raw && is_valid_line_inside(line, map) && !(is_empty_or_spaces(line)))
+	else if (map->map_raw)
 	{
-		map->map_raw = ft_strjoin(map->map_raw, line);
-		found_void = 0;
-	}
-	else if (map->map_raw && is_valid_line_inside(line, map) && is_empty_or_spaces(line))
-    {
-		found_void = 1;
-		if (found_content && found_void)
+		if (is_valid_line_inside(line, map) && !(is_empty_or_spaces(line)))
+			map->map_raw = ft_strjoin(map->map_raw, line);
+		else
+		{
+			free (line);
+			free_init_map(map);
 			ft_write_error("Error. Bad map!\n");
+		}
 	}
-	(*line_number)++;
-	free(line);
+	if (map->map_raw)
+		(*line_number)++;
 }
 
-int	set_measures_and_close(t_map *map, int line_number, int fd)
+void	set_measures_and_close(t_map *map, int line_number, int fd)
 {
-	map->map_end = line_number;
-	map->max_height = map->map_end - map->map_start + 3;
-	printf("Max height = %i\n", map->max_height);
 	if (close(fd) == -1)
 		ft_write_error("Error closing file descriptor\n");
-	return (fd);
+	if (map->found_map)
+	{
+		map->map_end = line_number;
+		map->max_height = map->map_end - map->map_start + 3;
+		printf("Max height = %i\n", map->max_height);
+		printf("map_raw = %s\n", map->map_raw);
+	}
+	else
+	{
+		free_init_map(map);
+		ft_write_error("Error. Bad map!\n");
+	}
 }
 
 void	ft_read_map(char **argv, t_map *map)
@@ -73,7 +83,6 @@ void	ft_read_map(char **argv, t_map *map)
 	line = get_next_line(fd);
 	if (!line)
 		ft_write_error("Error reading lines of the map\n");
-	map->map_raw = NULL;
 	while (line)
 	{
 		process_map_line(map, line, &line_number);

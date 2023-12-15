@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:42:22 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/14 19:24:54 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/15 19:39:56 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	create_2d(t_map *map)
 		map_2d[i] = (char *)malloc((map->max_width) * sizeof(char));
 		while (j < map->max_width)
 		{
-			map_2d[i][j] = ' ';
+			map_2d[i][j] = '-';
 			j++;
 		}
 		i++;
@@ -71,7 +71,7 @@ void	handle_tabs(t_map *map, int y, int *x, int *k)
 	i = 0;
 	while (i < 4 && *x < map->max_width - 1)
 	{
-		map->map_2d[y][(*x)] = ' ';
+		map->map_2d[y][(*x)] = '-';
 		(*x)++;
 		i++;
 	}
@@ -94,6 +94,11 @@ void	copy_line_to_map(t_map *map)
 			if (map->map_raw[k] != '\n' && map->map_raw[k] != '\0'
 				&& map->map_raw[k] != '\t')
 				map->map_2d[y][x++] = map->map_raw[k++];
+			else if (map->map_raw[k] == ' ')
+			{
+				map->map_2d[y][x++] = '-';
+				k++;
+			}
 			else if (map->map_raw[k] == '\t')
 				handle_tabs(map, y, &x, &k);
 			else if (map->map_raw[k] == '\n')
