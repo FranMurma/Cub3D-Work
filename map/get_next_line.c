@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:10:05 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/15 18:02:59 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/19 11:30:00 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)(s + cont));
 	return (NULL);
 }
-
+/*
 char	*ft_cutword(char *prt)
 {
 	int		i;
@@ -80,8 +80,8 @@ char	*ft_cutword(char *prt)
 	dest[j] = '\0';
 	free(prt);
 	return (dest);
-}
-
+}*/
+/*
 char	*ft_read(int fd, char *ptr)
 {
 	int		bytes;
@@ -105,8 +105,8 @@ char	*ft_read(int fd, char *ptr)
 	}
 	free(temp);
 	return (ptr);
-}
-
+}*/
+/*
 char	*get_next_line(int fd)
 {
 	static char	*ptr;
@@ -136,4 +136,176 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	return (line);
+}*/
+
+char	*free_malloc(char *str)
+{
+	free(str);
+	return (NULL);
+}
+
+int	contain_line(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	get_len(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+int	get_storage_len(char *storage)
+{
+	if (storage)
+		return (get_len(storage));
+	else
+		return (0);
+}
+
+char	*concat_str(char *storage, char *buffer, int len_b)
+{
+	int		i;
+	int		len_s;
+	char	*str;
+
+	len_s = get_storage_len(storage);
+	str = malloc(sizeof(char) * (len_s + len_b + 1));
+	if (str == NULL)
+		return (free_malloc(storage));
+	i = 0;
+	while (i < len_s)
+	{
+		str[i] = storage[i];
+		i++;
+	}
+	i = 0;
+	while (i < len_b)
+	{
+		str[len_s + i] = buffer[i];
+		i++;
+	}
+	str[len_s + i] = '\0';
+	free(storage);
+	return (str);
+}
+
+int	count_line_words(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\n')
+		i++;
+	return (i + 1);
+}
+
+void	clean_storage(char *storage)
+{
+	int		old_len;
+	int		new_len;
+	int		i;
+
+	old_len = count_line_words(storage);
+	new_len = get_len(storage) - old_len;
+	i = 0;
+	while (i < new_len)
+	{
+		storage[i] = storage[old_len + i];
+		i++;
+	}
+	while (i < old_len)
+	{
+		storage[i] = '\0';
+		i++;
+	}
+	storage[i] = '\0';
+}
+
+char	*extract_line(char *str)
+{
+	int		words;
+	int		i;
+	char	*line;
+
+	words = count_line_words(str);
+	line = malloc(sizeof(char) * (words + 1));
+	if (line == NULL)
+	{
+		free(str);
+		return (NULL);
+	}
+	i = 0;
+	while (i < words)
+	{
+		line[i] = str[i];
+		i++;
+	}
+	line[i] = '\0';
+	clean_storage(str);
+	return (line);
+}
+
+char	*extract_last_line(char *str, int numbytes, char *buffer)
+{
+	int		words;
+	int		i;
+	char	*line;
+
+	free(buffer);
+	if (str == NULL || numbytes == -1)
+		return (free_malloc(str));
+	if (str[0] == '\0')
+		return (free_malloc(str));
+	words = get_len(str);
+	line = malloc(sizeof(char) * (words + 1));
+	if (line == NULL)
+		return (free_malloc(str));
+	i = 0;
+	while (i < words)
+	{
+		line[i] = str[i];
+		str[i] = '\0';
+		i++;
+	}
+	line[i] = '\0';
+	return (line);
+}
+
+char	*get_next_line(int fd)
+{
+	char		*buffer;
+	static char	*storage;
+	int			numbytes;
+
+	if (fd == -1 || fd >= 1000)
+		return (NULL);
+	if (storage && contain_line(storage) == 1)
+		return (extract_line(storage));
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (buffer == NULL)
+		return (free_malloc(storage));
+	numbytes = read(fd, buffer, BUFFER_SIZE);
+	if (numbytes == 0 || numbytes == -1)
+		return (extract_last_line(storage, numbytes, buffer));
+	buffer[BUFFER_SIZE] = '\0';
+	storage = concat_str(storage, buffer, numbytes);
+	free(buffer);
+	buffer = NULL;
+	if (storage == NULL)
+		return (NULL);
+	return (get_next_line(fd));
 }

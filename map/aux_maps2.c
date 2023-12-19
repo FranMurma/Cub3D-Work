@@ -6,14 +6,13 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:45:30 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/13 20:36:49 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/19 18:24:51 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "map.h"
 
 void	ft_write(char *message)
 {
-    write(2, "Error\n", 6);
     write(2, message, ft_strlen(message));
     write(2, "\n", 1);
     return ;

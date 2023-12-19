@@ -6,11 +6,12 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:59:44 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/14 19:30:43 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/19 20:01:11 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "player.h"
+# include "../map/map.h"
 
 t_player	*init_player(void)
 {
@@ -19,8 +20,7 @@ t_player	*init_player(void)
 	player = malloc(sizeof(t_player));
 	if (!player)
 	{
-		ft_write("Error allocating memory for player\n");
-		return (NULL);
+		ft_write_error("Error allocating memory for player\n");
 	}
 
 	player->px = 0;
@@ -35,8 +35,10 @@ void    get_player(t_map *map, t_player *player)
 {
 	int	y;
 	int	x;
+	int	p;
 
 	y = 0;
+	p = 0;
 	while (y < map->max_height)
 	{
 //		printf("%c", map->map_2d[y][x]);
@@ -51,13 +53,15 @@ void    get_player(t_map *map, t_player *player)
 				player->px = x;
 				player->py = y;
 				get_player_direction(map, player, y, x);
-				return ;
+				p++;
 			}
 			x++;
 		}
 		y++;
 	}
-	ft_write_error("Error\nPlayer position not found\n");
+	printf("P = %i\n", p);
+	if (p != 1)
+		ft_write_error("Error\nBad player position\n");
 }
 
 void	get_player_direction(t_map *map, t_player *player, int y, int x)
@@ -82,7 +86,7 @@ void	get_player_direction(t_map *map, t_player *player, int y, int x)
 		player->diry = 0;
 		player->dirx = 1;
 	}
-	printf("player position--  x = %lf-- y = %lf--\nPlayer direction = x = %lf-- y = %lf--", player->px, player->py, player->dirx, player->diry);
+	printf("player position--  x = %lf-- y = %lf--\nPlayer direction = x = %lf-- y = %lf--\n", player->px, player->py, player->dirx, player->diry);
 	map->map_2d[y][x] = '0';
 //	print_filled_map(map);
 	if (!check_map(map))

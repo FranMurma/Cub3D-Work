@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 12:57:49 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/13 19:37:34 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/19 19:59:04 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,16 @@ bool	only_map_chars(char *line)
 
 void	process_textures(t_textures *texture, char *line)
 {
+	char	*tmp;
 	if (!texture->texture_raw && !only_map_chars(line))
 		texture->texture_raw = ft_strdup(line);
 	else if (texture->texture_raw && !only_map_chars(line))
-		texture->texture_raw = ft_strjoin(texture->texture_raw, line);
+	{
+		tmp = ft_strjoin(texture->texture_raw, line);
+		free (texture->texture_raw);
+		texture->texture_raw = tmp;
+		free (tmp);
+	}
 	free(line);
 }
 
@@ -81,6 +87,7 @@ void	ft_read_textures(char **argv, t_textures *texture)
 	int		fd;
 	char	*line;
 
+	printf("EBTRO\n");
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		ft_write_error("Error opening map file\n");
@@ -92,9 +99,14 @@ void	ft_read_textures(char **argv, t_textures *texture)
 	{
 		if (!is_empty_or_spaces(line))
 			process_textures(texture, line);
+		free (line);
 		line = get_next_line(fd);
 		if (!line)
 			break ;
 	}
+	printf("North path = %s\n", texture->paths->north);
+	printf("South path = %s\n", texture->paths->south);
+	printf("East path = %s\n", texture->paths->east);
+	printf("West path = %s\n", texture->paths->west);
 	free(line);
 }

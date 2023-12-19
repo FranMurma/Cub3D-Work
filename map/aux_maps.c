@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:59:15 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/15 18:23:36 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/16 12:15:57 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,25 +71,25 @@ char	*ft_strdup(const char *s1)
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		cont_s1;
-	int		cont_s2;
-	char	*s3;
+	char	*str;
+	int		l_s1;
+	int		l_s2;
+	int		c;
 
-	s3 = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!s3)
+	l_s1 = ft_strlen((char *)s1);
+	l_s2 = ft_strlen((char *)s2);
+	str = malloc(sizeof(char) * (l_s1 + l_s2 + 1));
+	if (str == NULL)
 		return (NULL);
-	cont_s1 = 0;
-	cont_s2 = 0;
-	while (s1[cont_s1])
+	c = 0;
+	while (c < l_s2 || c < l_s1)
 	{
-		s3[cont_s1] = s1[cont_s1];
-		cont_s1++;
+		if (c < l_s1)
+			str[c] = s1[c];
+		if (c < l_s2)
+			str[l_s1 + c] = s2[c];
+		c++;
 	}
-	while (s2[cont_s2])
-	{
-		s3[cont_s1 + cont_s2] = s2[cont_s2];
-		cont_s2++;
-	}
-	s3[cont_s1 + cont_s2] = '\0';
-	return (s3);
+	str[l_s1 + l_s2] = '\0';
+	return (str);
 }

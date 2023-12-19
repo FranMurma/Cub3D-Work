@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 19:26:09 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/13 19:37:41 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/19 19:45:50 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,37 @@ t_texture_type	get_texture_type(t_textures *texture, int index)
 		return (C);
 	else
 		return (UNKNOWN);
+}
+
+void free_textures(t_textures *texture)
+{
+    if (texture)
+    {
+        // Liberar texture->texture_raw si es necesario
+        if (texture->texture_raw)
+            free(texture->texture_raw);
+
+        // Liberar las rutas en texture->paths si son necesarias
+        if (texture->paths)
+        {
+            if (texture->paths->north)
+                free(texture->paths->north);
+            if (texture->paths->south)
+                free(texture->paths->south);
+            if (texture->paths->east)
+                free(texture->paths->east);
+            if (texture->paths->west)
+                free(texture->paths->west);
+            if (texture->paths->floor)
+                free(texture->paths->floor);
+            if (texture->paths->ceil)
+                free(texture->paths->ceil);
+
+            // Liberar la estructura texture->paths
+            free(texture->paths);
+        }
+
+        // Liberar la estructura t_textures
+        free(texture);
+    }
 }

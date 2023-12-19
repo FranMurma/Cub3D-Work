@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:25:22 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/15 20:10:38 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/19 20:01:06 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,30 @@ void	ft_start_map(char **argv)
 	t_map	*map;
 	map	= init_map();
 	ft_read_map(argv, map);
-	
-/*	t_textures *texture;
-	texture = init_textures();
-	t_player *player;
+	create_2d(map);
+	copy_line_to_map(map);
+	printf("Llego en start_map, en check_p\n");
+	print_filled_map(map);
+	t_textures *texture;
+	texture = init_textures();//leaks
+	ft_read_textures(argv, texture);//objeto liberado sin estar allocado
+//	process_texture_raw(texture);
+/*	t_player *player;
 	player = init_player();
+	get_player(map, player);
 	t_map_color *color;
 	color = init_color();
-	create_2d(map);
-	print_filled_map(map);
-	copy_line_to_map(map);
-	get_player(map, player);
-	print_filled_map(map);
+	ft_check_color(color);
 	ft_read_textures(argv, texture);
+	process_texture_raw(texture);
+	get_color_floor(color, texture);
+	get_color_ceil(color, texture);*/
+	free_map(map);
+//	free_textures(texture);
+//	free(map->map_raw);
+/*	ft_read_textures(argv, texture);
     // Procesar y mostrar información de texturas
-    process_texture_raw(texture);
+    process_texture_raw(texture);*/
 //    printf("\nPaths:\n");
 //    printf("North: %s\n", texture->paths->north);
 //    printf("South: %s\n", texture->paths->south);
@@ -83,7 +92,7 @@ void	ft_start_map(char **argv)
 //    printf("East: %s\n", texture->paths->east);
 //    printf("Floor: %s\n", texture->paths->floor);
 //    printf("Ceil: %s\n", texture->paths->ceil);
-	get_color_floor(color, texture);
+/*	get_color_floor(color, texture);
 	get_color_ceil(color, texture);
 	ft_check_color(color);*/
 }

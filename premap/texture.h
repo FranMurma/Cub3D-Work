@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 12:58:57 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/14 13:51:27 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/19 20:01:09 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_textures {
 
 //init_textures.c
 t_textures		*init_textures(void);
+void			free_textures(t_textures *texture);
 
 // read_textures
 void    		ft_read_textures(char **argv, t_textures *texture);
