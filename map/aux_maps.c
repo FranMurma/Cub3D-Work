@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:59:15 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/16 12:15:57 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/20 14:53:44 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 	// Funciones de libft y el write error con mensaje
 void	ft_write_error(char *message)
 {
-    write(2, "Error\n", 6);
     write(2, message, ft_strlen(message));
     write(2, "\n", 1);
     exit(-1);

@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:42:22 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/19 19:25:10 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:17:18 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_map	*init_map(void)
 	map->map_raw = NULL;
 	map->max_height = 0;
 	map->max_width = 0;
-//	printf("Map initialized successfully.\n");
+	map->map_2d = NULL;
 	return (map);
 }
 
@@ -32,13 +32,12 @@ t_map	*init_map(void)
  * ****/
 void	create_2d(t_map *map)
 {
-	char	**map_2d;
 	int		i;
 	int		j;
 
 	i = 0;
-	map_2d = (char **)malloc((map->max_height) * sizeof(char *));
-	if (!map_2d)
+	map->map_2d = (char **)malloc((map->max_height) * sizeof(char *));
+	if (!map->map_2d)
 	{
 		ft_write("Error\nCan't allocate memorry for map 2d\n");
 		free_init_map(map);
@@ -46,17 +45,16 @@ void	create_2d(t_map *map)
 	while (i < map->max_height)
 	{
 		j = 0;
-		map_2d[i] = (char *)malloc((map->max_width) * sizeof(char));
+		map->map_2d[i] = (char *)malloc((map->max_width) * sizeof(char));
 //		printf("Dirección de memoria de 'map_2d[i]': %p\n", (void *)map_2d[i]);
 		while (j < map->max_width)
 		{
-			map_2d[i][j] = '-';
+			map->map_2d[i][j] = '-';
 			j++;
 		}
 		i++;
 	}
-	map->map_2d = map_2d;
-	i = 0;
+//	i = 0;
 //	free_init_map(map);
 //	free_map_2d(map, map_2d);
 }
@@ -91,9 +89,10 @@ void	copy_line_to_map(t_map *map)
 	y = 1;
 	x = 1;
 	k = 0;
-//	printf("Entro en COPY\n");
+	printf("Entro en COPY\n");
 	while (y <= map->max_height - 1 && map->map_raw[k] != '\0')
 	{
+		x = 1;
 		while (x <= map->max_width - 1)
 		{
 			if (map->map_raw[k] != '\n' && map->map_raw[k] != '\0'
@@ -105,15 +104,21 @@ void	copy_line_to_map(t_map *map)
 				k++;
 			}
 			else if (map->map_raw[k] == '\t')
+			{
 				handle_tabs(map, y, &x, &k);
+			}
 			else if (map->map_raw[k] == '\n')
+			{
 				handle_slash_en(map, &y, &k, &x);
+			}
 			else
+			{
 				break ;
+			}
 		}
 	}
 //	free (map->map_raw);
-//	printf("LLEGO\n");
+	printf("LLEGO\n");
 //	map->map_raw = NULL;
 //	print_filled_map(map);
 }

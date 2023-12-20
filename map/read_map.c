@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:27:50 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/19 18:32:09 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:07:56 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	process_map_line(t_map *map, char *line, int *line_number)
 			free (line);
 			free (map->map_raw);
 //			free_init_map(map);
-			ft_write_error("Error. Bad map!\n");
+			ft_write_error("Error. Bad map, I can't found good lines with '1s' and '0s'!\n");
 		}
 	}
 	if (map->map_raw)
@@ -97,13 +97,14 @@ void	process_map_line(t_map *map, char *line, int *line_number)
 
 void	set_measures_and_close(t_map *map, int line_number, int fd)
 {
-	printf("XXXXXXXXXXXXX\n");
+//	printf("XXXXXXXXXXXXX\n");
 	if (close(fd) == -1)
 		ft_write_error("Error\nWhile closing file descriptor\n");
 	if (map->found_map)
 	{
 		map->map_end = line_number;
 		map->max_height = map->map_end - map->map_start + 2;
+//		printf("Line NUmber = %i\n", line_number);
 //		printf("Max height = %d\n", map->max_height);
 //		printf("Max width = %d\n", map->max_width);
 //		printf("map_raw = %s\n", map->map_raw);
@@ -112,7 +113,6 @@ void	set_measures_and_close(t_map *map, int line_number, int fd)
 	}
 	else
 	{
-		write(1, "2\n", 2);
 //		free_init_map(map);
 		ft_write_error("Error. Bad map, I can't found signs for map!\n");
 	}
@@ -144,7 +144,6 @@ void	ft_read_map(char **argv, t_map *map)
 		}
 	}
 	free(line);
-	write(1, "yyyyyyyyyyyy\n", 13);
 	set_measures_and_close(map, line_number, fd);
 }
 

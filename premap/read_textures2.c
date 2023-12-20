@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 19:26:09 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/19 19:45:50 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/20 18:37:57 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 t_texture_type	get_texture_type(t_textures *texture, int index)
 {
+	printf("entreo en el selector\n");
 	texture->info[index] = ft_strtrim(texture->info[index], " ");
 
 	if (ft_strcmp("NO", texture->info[index]))
@@ -30,6 +31,7 @@ t_texture_type	get_texture_type(t_textures *texture, int index)
 		return (C);
 	else
 		return (UNKNOWN);
+	free (texture->info[index]);
 }
 
 void free_textures(t_textures *texture)
@@ -63,4 +65,5 @@ void free_textures(t_textures *texture)
         // Liberar la estructura t_textures
         free(texture);
     }
+
 }

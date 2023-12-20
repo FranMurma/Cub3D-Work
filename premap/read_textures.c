@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 12:57:49 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/19 19:59:04 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/20 19:18:17 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,67 @@ void process_texture_raw(t_textures *texture)
    
 	i = 0;
 	texture->info = ft_split(texture->texture_raw, '\n');//texture->info[] es cada linea
-    while (i < 6 && texture->info[i])
+	while (i < 6 && texture->info[i])
     {
+		printf("Dirección de 'texture_info': %p\n", (void *)texture->info[i]);
 		texture->type = get_texture_type(texture, i);
 		paths = ft_split(texture->info[i], ' ');
 		info = ft_strtrim(paths[1], " ");
+//		printf("Dirección de 'info': %p\n", (void *)info);
+		printf("Dirección de 'texture->type': %p\n", (void *)texture->type);
 		if (texture->type == NO)
-			texture->paths->north = info;
+		{
+			texture->paths->north = ft_strdup(info);
+			free (info);
+		}
 		else if (texture->type == SO)
-			texture->paths->south = info;
+		{
+			texture->paths->south = ft_strdup(info);
+			free (info);
+		}
 		else if (texture->type == WE)
-			texture->paths->west = info;
+		{
+			texture->paths->west = ft_strdup(info);
+			free (info);
+		}
+
 		else if (texture->type == EA)
-			texture->paths->east = info;
+		{
+			texture->paths->east = ft_strdup(info);
+			free (info);
+		}
 		else if (texture->type == F)
-			texture->paths->floor = info;
+		{
+			texture->paths->floor = ft_strdup(info);
+			free (info);
+		}
 		else if (texture->type == C)
-			texture->paths->ceil = info;
+		{
+			texture->paths->ceil = ft_strdup(info);
+			free (info);
+		}
         i++;
     }
+	if (!are_texture_paths_filled (texture->paths))
+		ft_write_error("Error\ntexture paths are not filled\n");
+	printf("North path = %s\n", texture->paths->north);
+	printf("South path = %s\n", texture->paths->south);
+	printf("West path = %s\n", texture->paths->west);
+	printf("East path = %s\n", texture->paths->east);
+	printf("Floor path = %s\n", texture->paths->floor);
+	printf("Ceil path = %s\n", texture->paths->ceil);
+	i = 0;
+	while (paths[i])
+	{
+		if (texture->info[i] != NULL)
+			free(texture->info[i]);
+		free(paths[i]);
+		i++;
+	}
+	free(texture->info);
+//	free_textures(texture);
+//	close_process_texture(texture);
+	exit (-1);
 }
 
 bool	only_map_chars(char *line)
@@ -70,16 +112,23 @@ bool	only_map_chars(char *line)
 void	process_textures(t_textures *texture, char *line)
 {
 	char	*tmp;
-	if (!texture->texture_raw && !only_map_chars(line))
+
+	if (!texture->texture_raw)
+	{
 		texture->texture_raw = ft_strdup(line);
-	else if (texture->texture_raw && !only_map_chars(line))
+//		printf("Dirección de 'texture_raw' en !texture: %p\n", (void *)texture->texture_raw);
+//		printf("%s\n", texture->texture_raw);
+	}
+	else if (texture->texture_raw)
 	{
 		tmp = ft_strjoin(texture->texture_raw, line);
+//		printf("Dirección de 'tmp': %p\n", (void *)tmp);
 		free (texture->texture_raw);
-		texture->texture_raw = tmp;
+		texture->texture_raw = ft_strdup(tmp);
 		free (tmp);
+//		printf("%s\n", texture->texture_raw);
+//		free (tmp);
 	}
-	free(line);
 }
 
 void	ft_read_textures(char **argv, t_textures *texture)
@@ -90,23 +139,28 @@ void	ft_read_textures(char **argv, t_textures *texture)
 	printf("EBTRO\n");
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
+	{
+		close_struct_texture(texture);
 		ft_write_error("Error opening map file\n");
+	}
 	line = get_next_line(fd);
 	if (!line)
+	{
+		close_struct_texture(texture);
 		ft_write_error("Error reading lines of the map\n");
-	texture->texture_raw = NULL;
+	}
+//	texture->texture_raw = NULL;
 	while (line)
 	{
-		if (!is_empty_or_spaces(line))
+		if (!is_empty_or_spaces(line) && !only_map_chars(line))
 			process_textures(texture, line);
 		free (line);
 		line = get_next_line(fd);
 		if (!line)
+		{
+			process_texture_raw(texture);
+			free(texture->texture_raw);
 			break ;
+		}
 	}
-	printf("North path = %s\n", texture->paths->north);
-	printf("South path = %s\n", texture->paths->south);
-	printf("East path = %s\n", texture->paths->east);
-	printf("West path = %s\n", texture->paths->west);
-	free(line);
 }
