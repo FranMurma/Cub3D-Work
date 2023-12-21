@@ -6,17 +6,21 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 19:26:09 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/20 18:37:57 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/21 19:50:05 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "texture.h"
-
+/*
 t_texture_type	get_texture_type(t_textures *texture, int index)
 {
-	printf("entreo en el selector\n");
-	texture->info[index] = ft_strtrim(texture->info[index], " ");
+	char	*tmp;
 
+	printf("entreo en el selector\n");
+	tmp = ft_strtrim(texture->info[index], " ");
+	free (texture->info[index]);
+	texture->info[index] = tmp;
+	free (tmp);
 	if (ft_strcmp("NO", texture->info[index]))
 		return (NO);
 	else if (ft_strcmp("SO", texture->info[index]))
@@ -31,7 +35,56 @@ t_texture_type	get_texture_type(t_textures *texture, int index)
 		return (C);
 	else
 		return (UNKNOWN);
-	free (texture->info[index]);
+}*/
+
+t_texture_type	get_texture_type(t_textures *texture, int index)
+{
+	char	*tmp;
+
+	tmp = NULL;
+	printf("entreo en el selector\n");
+	tmp = ft_strtrim(texture->info[index], " ");
+	if (tmp != texture->info[index])
+	{
+		free (texture->info[index]);
+		texture->info[index] = tmp;
+	}
+	else
+		free (tmp);
+	if (ft_strcmp("NO", tmp))
+	{
+		printf("Dirección de 'tmp': %p\n", (void *)tmp);
+		return (NO);
+	}
+	else if (ft_strcmp("SO", tmp))
+	{
+		printf("Dirección de 'tmp': %p\n", (void *)tmp);
+		return (SO);
+	}
+	else if (ft_strcmp("WE", tmp))
+	{
+		printf("Dirección de 'tmp': %p\n", (void *)tmp);
+		return (WE);
+	}
+	else if (ft_strcmp("EA", tmp))
+	{
+		printf("Dirección de 'tmp': %p\n", (void *)tmp);
+		return (EA);
+	}
+	else if (ft_strcmp("F", tmp))
+	{
+		printf("Dirección de 'tmp': %p\n", (void *)tmp);
+		return (F);
+	}
+	else if (ft_strcmp("C", tmp))
+	{
+		printf("Dirección de 'tmp': %p\n", (void *)tmp);
+		return (C);
+	}
+	else
+	{
+		return (UNKNOWN);
+	}
 }
 
 void free_textures(t_textures *texture)

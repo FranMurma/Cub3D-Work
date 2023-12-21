@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 12:57:49 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/20 19:18:17 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/21 19:50:10 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,50 +18,65 @@ void process_texture_raw(t_textures *texture)
    	int		i;
 	char	*info;
 	char	**paths;
+	char 	**anotherReference;
    
 	i = 0;
 	texture->info = ft_split(texture->texture_raw, '\n');//texture->info[] es cada linea
 	while (i < 6 && texture->info[i])
     {
-		printf("Dirección de 'texture_info': %p\n", (void *)texture->info[i]);
+		info = NULL;
+		printf("Dirección de 'texture_info': %p   Y contiene: %s\n", (void *)texture->info[i], texture->info[i]);
 		texture->type = get_texture_type(texture, i);
+		printf("222. 'texture_info': %p   Y contiene: %s\n", (void *)texture->info[i], texture->info[i]);
 		paths = ft_split(texture->info[i], ' ');
+		free (texture->info[i]);
 		info = ft_strtrim(paths[1], " ");
+		free (paths[1]);
+		free (paths[0]);
 //		printf("Dirección de 'info': %p\n", (void *)info);
-		printf("Dirección de 'texture->type': %p\n", (void *)texture->type);
+//		printf("Dirección de 'texture->type': %p\n", (void *)texture->type);
 		if (texture->type == NO)
 		{
 			texture->paths->north = ft_strdup(info);
-			free (info);
 		}
 		else if (texture->type == SO)
 		{
 			texture->paths->south = ft_strdup(info);
-			free (info);
 		}
 		else if (texture->type == WE)
 		{
 			texture->paths->west = ft_strdup(info);
-			free (info);
 		}
-
 		else if (texture->type == EA)
 		{
 			texture->paths->east = ft_strdup(info);
-			free (info);
 		}
 		else if (texture->type == F)
 		{
 			texture->paths->floor = ft_strdup(info);
-			free (info);
 		}
 		else if (texture->type == C)
 		{
 			texture->paths->ceil = ft_strdup(info);
-			free (info);
 		}
+		free (info);
         i++;
     }
+	i = 0;
+//	free (info);
+//	free (paths);
+/*	while (anotherReference[i])
+	{
+		printf("Direccion another reference = %p\n", (void *)paths[i]);
+		free (anotherReference[i]);
+		i++;
+	}*/
+/*	while (texture->info[i])
+	{
+		printf("2. Dirección de 'texture_info': %p\n", (void *)texture->info[i]);
+//		free(texture->info[i]);
+		i++;
+	}*/
 	if (!are_texture_paths_filled (texture->paths))
 		ft_write_error("Error\ntexture paths are not filled\n");
 	printf("North path = %s\n", texture->paths->north);
@@ -71,14 +86,11 @@ void process_texture_raw(t_textures *texture)
 	printf("Floor path = %s\n", texture->paths->floor);
 	printf("Ceil path = %s\n", texture->paths->ceil);
 	i = 0;
-	while (paths[i])
+/*	while (paths[i])
 	{
-		if (texture->info[i] != NULL)
-			free(texture->info[i]);
 		free(paths[i]);
 		i++;
-	}
-	free(texture->info);
+	}*/
 //	free_textures(texture);
 //	close_process_texture(texture);
 	exit (-1);
