@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:46:20 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/20 15:01:33 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/22 13:58:12 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ char    *ft_strtrim(char const *s1, char const *set);
 bool    ft_strcmp(char *s1, char *s2);
 size_t  ft_strlcpy(char *dst, const char *src, size_t dstsize);
 void    *ft_memmove(void *dst, const void *src, size_t len);
-
 //aux_maps3.c
 bool    ft_check_comas(char *input);
 void    ft_bzero(void *str, size_t n);

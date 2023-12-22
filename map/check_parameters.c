@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:25:22 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/20 19:19:32 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/22 20:01:05 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,31 +58,25 @@ void 	ft_check_parameters(int argc, char **argv)
 
 void	ft_start_map(char **argv)
 {
-//	t_map	*map;
-//	map	= init_map();
-//	ft_read_map(argv, map);
-//	create_2d(map);
-//	print_filled_map(map);
-//	copy_line_to_map(map);
-//	print_filled_map(map);
+/*	t_map	*map;
+	map	= init_map();
+	ft_read_map(argv, map);
+	create_2d(map);
+	print_filled_map(map);
+	copy_line_to_map(map);
+	print_filled_map(map);*/
 //	free_map(map);// Bien hasta aqui, libera todo
 	t_textures *texture;
 	texture = init_textures();
 	ft_read_textures(argv, texture);//objeto liberado sin estar allocado
-//	process_texture_raw(texture);
-//	free_map(map);
-//	close_struct_texture(texture);
-//	process_texture_raw(texture);
-/*	t_player *player;
-	player = init_player();
-	get_player(map, player);
+//	t_player *player;
+//	player = init_player();
+//	get_player(map, player);
 	t_map_color *color;
 	color = init_color();
 	ft_check_color(color);
-	ft_read_textures(argv, texture);
-	process_texture_raw(texture);
 	get_color_floor(color, texture);
-	get_color_ceil(color, texture);*/
+	get_color_ceil(color, texture);
 //	free_map(map);
 //	free_textures(texture);
 //	free(map->map_raw);
@@ -99,4 +93,5 @@ void	ft_start_map(char **argv)
 /*	get_color_floor(color, texture);
 	get_color_ceil(color, texture);
 	ft_check_color(color);*/
+	exit (-1);
 }

@@ -6,117 +6,27 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 19:26:09 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/21 19:50:05 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/22 19:43:14 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "texture.h"
-/*
-t_texture_type	get_texture_type(t_textures *texture, int index)
+#include "texture.h"
+
+void	get_texture_type(t_textures *texture, int index, char *info,
+		char **paths)
 {
-	char	*tmp;
-
-	printf("entreo en el selector\n");
-	tmp = ft_strtrim(texture->info[index], " ");
-	free (texture->info[index]);
-	texture->info[index] = tmp;
-	free (tmp);
-	if (ft_strcmp("NO", texture->info[index]))
-		return (NO);
-	else if (ft_strcmp("SO", texture->info[index]))
-		return (SO);
-	else if (ft_strcmp("WE", texture->info[index]))
-		return (WE);
-	else if (ft_strcmp("EA", texture->info[index]))
-		return (EA);
-	else if (ft_strcmp("F", texture->info[index]))
-		return (F);
-	else if (ft_strcmp("C", texture->info[index]))
-		return (C);
+	if (ft_strcmp("NO", paths[0]) && texture->paths->north == NULL)
+		texture->paths->north = ft_strdup(info);
+	else if (ft_strcmp("SO", paths[0]) && texture->paths->south == NULL)
+		texture->paths->south = ft_strdup(info);
+	else if (ft_strcmp("WE", paths[0]) && texture->paths->west == NULL)
+		texture->paths->west = ft_strdup(info);
+	else if (ft_strcmp("EA", paths[0]) && texture->paths->east == NULL)
+		texture->paths->east = ft_strdup(info);
+	else if (ft_strcmp("F", paths[0]) && texture->paths->floor == NULL)
+		texture->paths->floor = ft_strdup(info);
+	else if (ft_strcmp("C", paths[0]) && texture->paths->ceil == NULL)
+		texture->paths->ceil = ft_strdup(info);
 	else
-		return (UNKNOWN);
-}*/
-
-t_texture_type	get_texture_type(t_textures *texture, int index)
-{
-	char	*tmp;
-
-	tmp = NULL;
-	printf("entreo en el selector\n");
-	tmp = ft_strtrim(texture->info[index], " ");
-	if (tmp != texture->info[index])
-	{
-		free (texture->info[index]);
-		texture->info[index] = tmp;
-	}
-	else
-		free (tmp);
-	if (ft_strcmp("NO", tmp))
-	{
-		printf("Dirección de 'tmp': %p\n", (void *)tmp);
-		return (NO);
-	}
-	else if (ft_strcmp("SO", tmp))
-	{
-		printf("Dirección de 'tmp': %p\n", (void *)tmp);
-		return (SO);
-	}
-	else if (ft_strcmp("WE", tmp))
-	{
-		printf("Dirección de 'tmp': %p\n", (void *)tmp);
-		return (WE);
-	}
-	else if (ft_strcmp("EA", tmp))
-	{
-		printf("Dirección de 'tmp': %p\n", (void *)tmp);
-		return (EA);
-	}
-	else if (ft_strcmp("F", tmp))
-	{
-		printf("Dirección de 'tmp': %p\n", (void *)tmp);
-		return (F);
-	}
-	else if (ft_strcmp("C", tmp))
-	{
-		printf("Dirección de 'tmp': %p\n", (void *)tmp);
-		return (C);
-	}
-	else
-	{
-		return (UNKNOWN);
-	}
-}
-
-void free_textures(t_textures *texture)
-{
-    if (texture)
-    {
-        // Liberar texture->texture_raw si es necesario
-        if (texture->texture_raw)
-            free(texture->texture_raw);
-
-        // Liberar las rutas en texture->paths si son necesarias
-        if (texture->paths)
-        {
-            if (texture->paths->north)
-                free(texture->paths->north);
-            if (texture->paths->south)
-                free(texture->paths->south);
-            if (texture->paths->east)
-                free(texture->paths->east);
-            if (texture->paths->west)
-                free(texture->paths->west);
-            if (texture->paths->floor)
-                free(texture->paths->floor);
-            if (texture->paths->ceil)
-                free(texture->paths->ceil);
-
-            // Liberar la estructura texture->paths
-            free(texture->paths);
-        }
-
-        // Liberar la estructura t_textures
-        free(texture);
-    }
-
+		ft_write_error("Error\nBad data in the paths\n");
 }

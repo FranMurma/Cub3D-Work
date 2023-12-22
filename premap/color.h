@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:23:38 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/14 13:51:29 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/22 19:01:13 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ typedef struct s_map_color
 }	t_map_color;
 
 //color.
-t_map_color	*init_color(void);
+t_map_color		*init_color(void);
 void    		get_color_floor(t_map_color *color, t_textures *texture);
 void			get_color_ceil(t_map_color *color, t_textures *texture);
 void		    ft_check_color(t_map_color *color);
 unsigned int    create_hex_color(int r, int g, int b);
+void			free_colors(char **char_numbers);
 
 //aux_color.c
 bool	ft_isdigit(int c);

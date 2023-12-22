@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:24:22 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/14 13:51:24 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/22 19:01:11 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,64 +44,58 @@ t_map_color	*init_color(void)
  **** */
 void	get_color_floor(t_map_color *color, t_textures *texture)
 {
-	char	*r;
-	char	*g;
-	char	*b;
 	char	**char_numbers;
 	int		num_elements;
 
 	num_elements = 0;
 	char_numbers = ft_split(texture->paths->floor, ',');
-	while (char_numbers && char_numbers[num_elements])
+	while (char_numbers && char_numbers[num_elements]
+		&& is_numeric(char_numbers[num_elements]))
 		num_elements++;
 	if (num_elements == 3)
 	{
-		r = char_numbers[0];
-		g = char_numbers[1];
-		b = char_numbers[2];
-		if (is_numeric(r) && is_numeric(g) && is_numeric(b))
-		{
-			color->floor_color->r = ft_atoi(r);
-			color->floor_color->g = ft_atoi(g);
-			color->floor_color->b = ft_atoi(b);
-		}
-		else
-			ft_write_error("Error\nBad color numbers\n");
-		color->floor_color->hex = create_hex_color(ft_atoi(r), ft_atoi(g), ft_atoi(b));
-		printf("Hex color floor: 0x%X\n", color->floor_color->hex);
+		color->floor_color->r = ft_atoi(char_numbers[0]);
+		color->floor_color->g = ft_atoi(char_numbers[1]);
+		color->floor_color->b = ft_atoi(char_numbers[2]);
+		free_colors(char_numbers);
 	}
 	else
 		ft_write_error("Error\nBad color numbers\n");
+	color->floor_color->hex = create_hex_color(color->floor_color->r,
+		color->floor_color->g, color->floor_color->b); 
+	printf("Hex color floor: 0x%X\n", color->floor_color->hex);
+}
+
+void	free_colors(char **char_numbers)
+{
+	free (char_numbers[0]);
+	free (char_numbers[1]);
+	free (char_numbers[2]);
+	free (char_numbers);
 }
 
 void	get_color_ceil(t_map_color *color, t_textures *texture)
 {
-	char	*r;
-	char	*g;
-	char	*b;
 	char	**char_numbers;
 	int		num_elements;
 
 	num_elements = 0;
 	char_numbers = ft_split(texture->paths->ceil, ',');
-	while (char_numbers && char_numbers[num_elements])
+	while (char_numbers && char_numbers[num_elements]
+		&& is_numeric(char_numbers[num_elements]))
 		num_elements++;
 	if (num_elements == 3)
 	{
-		r = char_numbers[0];
-		g = char_numbers[1];
-		b = char_numbers[2];
-		if (is_numeric(r) && is_numeric(g) && is_numeric(b))
-		{
-			color->ceil_color->r = ft_atoi(r);
-			color->ceil_color->g = ft_atoi(g);
-			color->ceil_color->b = ft_atoi(b);
-		}
-		else
-			ft_write_error("Error\nBad color arguments\n");
-		color->ceil_color->hex = create_hex_color(ft_atoi(r), ft_atoi(g), ft_atoi(b));
-		printf("Hex color ceil: 0x%X\n", color->ceil_color->hex);
+		color->ceil_color->r = ft_atoi(char_numbers[0]);
+		color->ceil_color->g = ft_atoi(char_numbers[1]);
+		color->ceil_color->b = ft_atoi(char_numbers[2]);
+		free_colors(char_numbers);
 	}
+	else
+		ft_write_error("Error\nBad color arguments\n");
+	color->ceil_color->hex = create_hex_color(color->ceil_color->r,
+		color->ceil_color->g, color->ceil_color->b);
+	printf("Hex color ceil: 0x%X\n", color->ceil_color->hex);
 }
 
 void	ft_check_color(t_map_color *color)
@@ -114,6 +108,7 @@ void	ft_check_color(t_map_color *color)
 		color->floor_color->g > 255 || color->floor_color->b > 255)
 		ft_write_error("Error\nBad color number\n");
 }
+
 
 unsigned int	create_hex_color(int r, int g, int b)
 {
