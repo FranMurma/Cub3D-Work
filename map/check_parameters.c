@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:25:22 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/22 20:01:05 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/23 12:40:54 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,25 +58,33 @@ void 	ft_check_parameters(int argc, char **argv)
 
 void	ft_start_map(char **argv)
 {
-/*	t_map	*map;
-	map	= init_map();
-	ft_read_map(argv, map);
-	create_2d(map);
-	print_filled_map(map);
-	copy_line_to_map(map);
-	print_filled_map(map);*/
+	t_textures texture;
+	texture = init_textures(&texture);
+	ft_read_textures(argv, &texture);
+	t_map_color color;
+	color = init_color(&color);
+	ft_check_color(&color);
+	get_color_floor(&color, &texture);
+	get_color_ceil(&color, &texture);
+	t_map	map;
+	map	= init_map(&map);
+	ft_read_map(argv, &map);
+	create_2d(&map);
+	print_filled_map(&map);
+	copy_line_to_map(&map);
+	print_filled_map(&map);
 //	free_map(map);// Bien hasta aqui, libera todo
-	t_textures *texture;
-	texture = init_textures();
-	ft_read_textures(argv, texture);//objeto liberado sin estar allocado
+//	t_textures *texture;
+//	texture = init_textures();
+//	ft_read_textures(argv, texture);//objeto liberado sin estar allocado
 //	t_player *player;
 //	player = init_player();
 //	get_player(map, player);
-	t_map_color *color;
-	color = init_color();
-	ft_check_color(color);
-	get_color_floor(color, texture);
-	get_color_ceil(color, texture);
+//	t_map_color *color;
+//	color = init_color();
+//	ft_check_color(color);
+//	get_color_floor(color, texture);
+//	get_color_ceil(color, texture);
 //	free_map(map);
 //	free_textures(texture);
 //	free(map->map_raw);
@@ -93,5 +101,7 @@ void	ft_start_map(char **argv)
 /*	get_color_floor(color, texture);
 	get_color_ceil(color, texture);
 	ft_check_color(color);*/
+	free_map(&map);
+	free_textures (&texture);
 	exit (-1);
 }

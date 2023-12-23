@@ -6,13 +6,13 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 18:55:13 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/19 11:42:25 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/23 11:42:28 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 
-bool	skip_whitespace(t_map *map, char *line, int *length)
+bool	skip_whitespace(char *line, int *length)
 {
 	*length = 0;
 	while (line[*length] == ' ' || line[*length] == '\t')
@@ -31,13 +31,13 @@ bool	skip_whitespace(t_map *map, char *line, int *length)
 	return (true);
 }
 
-void	start_map(t_map *map, int *length, bool *map_started)
+void	start_map(int *length, bool *map_started)
 {
 	*map_started = true;
 	(*length)++;
 }
 
-void	process_other_chars(t_map *map, char *line, int *length)
+void	process_other_chars(char *line, int *length)
 {
 	if (line[*length] == '\n' || line[*length] == ' ')
 	{
@@ -49,7 +49,7 @@ void	process_other_chars(t_map *map, char *line, int *length)
 	}
 }
 
-bool	is_valid_map_line(char *line, t_map *map)
+bool	is_valid_map_line(char *line)
 {
 	int		length;
 	bool	map_started;
@@ -57,24 +57,24 @@ bool	is_valid_map_line(char *line, t_map *map)
 	length = 0;
 	map_started = false;
 	while (line[length] == ' ' || line[length] == '\t')
-		if (!skip_whitespace(map, line, &length))
+		if (!skip_whitespace(line, &length))
 			return (false);
 	while (line[length])
 	{
 		if (line[length] == '0' || line[length] == '1' || line[length] == 'N'
 			|| line[length] == 'S' || line[length] == 'E' || line[length]
 			== 'W')
-			start_map(map, &length, &map_started);
+			start_map(&length, &map_started);
 		else if ((line[length] == '\n' || line[length] == ' '
 				|| line[length] == '\t') && map_started)
-			process_other_chars(map, line, &length);
+			process_other_chars(line, &length);
 		else
 			return (false);
 	}
 	return (true);
 }
 
-bool	is_valid_line_inside(char *line, t_map *map)
+bool	is_valid_line_inside(char *line)
 {
 	int	length;
 

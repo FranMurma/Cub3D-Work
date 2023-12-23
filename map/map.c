@@ -6,24 +6,19 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:42:22 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/20 15:17:18 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/23 12:14:21 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 
-t_map	*init_map(void)
+t_map	init_map(t_map *map)
 {
-	t_map	*map;
-
-	map = malloc(sizeof(t_map));
-	if (!map)
-		ft_write_error("Error\nCan't allocate memorry for map\n");
 	map->map_raw = NULL;
 	map->max_height = 0;
 	map->max_width = 0;
 	map->map_2d = NULL;
-	return (map);
+	return (*map);
 }
 
 /******
@@ -59,7 +54,7 @@ void	create_2d(t_map *map)
 //	free_map_2d(map, map_2d);
 }
 
-void	handle_slash_en(t_map *map, int *y, int *k, int *x)
+void	handle_slash_en(int *y, int *k, int *x)
 {
 	(*x) = 1;
 	(*y)++;
@@ -109,7 +104,7 @@ void	copy_line_to_map(t_map *map)
 			}
 			else if (map->map_raw[k] == '\n')
 			{
-				handle_slash_en(map, &y, &k, &x);
+				handle_slash_en(&y, &k, &x);
 			}
 			else
 			{

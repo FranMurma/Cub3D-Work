@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:46:20 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/22 13:58:12 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/23 12:35:55 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void    ft_check_parameters(int argc, char **argv);
 void	ft_start_map(char **argv);
 
 // map.c
-t_map	*init_map(void);
+t_map	init_map(t_map *map);
 void	create_2d(t_map *map);
-void    handle_slash_en(t_map *map, int *y, int *k, int *x);
+void    handle_slash_en(int *y, int *k, int *x);
 void    handle_tabs(t_map *map, int y, int *x, int *k);
 void    copy_line_to_map(t_map *map);
 
@@ -83,11 +83,11 @@ char    *ft_strndup(char *s1, size_t len);
 
 // check_lines.c
 	// Funciones para asegurar que la linea es de mapa y ver que linea es la mas ancha
-bool    skip_whitespace(t_map *map, char *line, int *length);
-void    start_map(t_map *map, int *length, bool *map_started);
-void    process_other_chars(t_map *map, char *line, int *length);
-bool    is_valid_map_line(char *line, t_map *map);
-bool    is_valid_line_inside(char *line, t_map *map);
+bool    skip_whitespace(char *line, int *length);
+void    start_map(int *length, bool *map_started);
+void    process_other_chars(char *line, int *length);
+bool    is_valid_map_line(char *line);
+bool    is_valid_line_inside(char *line);
 
 // get_next_line
 char    *get_next_line(int fd);

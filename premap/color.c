@@ -6,22 +6,14 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:24:22 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/22 19:01:11 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/23 12:08:18 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
 
-t_map_color	*init_color(void)
+t_map_color	init_color(t_map_color *color)
 {
-	t_map_color	*color;
-
-	color = malloc(sizeof(t_map_color));
-	if (!color)
-	{
-		fprintf(stderr, "Error: Unable to allocate memory for t_map_color\n");
-		exit(EXIT_FAILURE);
-	}
 	color->floor_color = malloc(sizeof(t_color));
 	color->ceil_color = malloc(sizeof(t_color));
 	if (!color->floor_color || !color->ceil_color)
@@ -35,7 +27,7 @@ t_map_color	*init_color(void)
 	color->ceil_color->r = 0;
 	color->ceil_color->g = 0;
 	color->ceil_color->b = 0;
-	return (color);
+	return (*color);
 }
 
 /*****

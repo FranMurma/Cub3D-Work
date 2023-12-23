@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:27:50 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/20 15:07:56 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/23 11:45:20 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	append_line_to_map_raw(t_map *map, char *line, int *line_number)
 {
 	char	*tmp;
 	char	*dup;
-	size_t	len;
+	int		len;
 
 //	printf("Entro en append line\n");
 	len = ft_strlen(line);
@@ -71,14 +71,14 @@ void	process_map_line(t_map *map, char *line, int *line_number)
 	{
 //		if (!is_empty_or_spaces(line) && !is_valid_map_line(line, map))//anadido
 //			process_textures(texture, line);//anadido
-		if (is_valid_map_line(line, map) && !(is_empty_or_spaces(line)))
+		if (is_valid_map_line(line) && !(is_empty_or_spaces(line)))
 			append_line_to_map_raw(map, line, line_number);
 		else
 			map->found_map = false;
 	}
 	else if (map->map_raw)
 	{
-		if (is_valid_line_inside(line, map) && !(is_empty_or_spaces(line)))
+		if (is_valid_line_inside(line) && !(is_empty_or_spaces(line)))
 		{
 			append_line_to_map_raw(map, line, line_number);
 //			printf("Dirección de memoria de 'line en join': %p\n", (void *)map->map_raw);

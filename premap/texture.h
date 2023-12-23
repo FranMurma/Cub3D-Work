@@ -6,14 +6,14 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 12:58:57 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/22 20:00:13 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/23 12:36:35 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TEXTURE_H
 # define TEXTURE_H
 
-# include "../map/map.h"
+#include "../map/map.h"
 
 # include <stdio.h>
 # include <unistd.h>
@@ -62,7 +62,9 @@ typedef struct s_textures
 
 //init_textures.c
 bool			are_texture_paths_filled(t_cardinal *paths);
-t_textures		*init_textures(void);
+t_textures		init_textures(t_textures *texture);
+void			free_textures(t_textures *texture);
+void    		free_cardinals(t_cardinal *paths);
 
 // read_textures
 void			process_texture_raw(t_textures *texture);
@@ -72,7 +74,7 @@ void			process_textures(t_textures *texture, char *line);
 void			ft_read_textures(char **argv, t_textures *texture);
 
 // read_textures// read_textures// read_textures2.c
-void			get_texture_type(t_textures *texture, int index,
+void			get_texture_type(t_textures *texture,
 					char *info, char **paths);
 
 #endif

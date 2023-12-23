@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 12:57:49 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/22 20:00:09 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/23 12:40:51 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	process_texture_raw(t_textures *texture)
 		paths = ft_split(textinfo, ' ');
 		free (textinfo);
 		info = ft_strtrim(paths[1], " ");
-		get_texture_type(texture, i, info, paths);
+		get_texture_type(texture, info, paths);
 		free_texture_paths(paths);
 		free (info);
 		i++;
@@ -58,7 +58,7 @@ void	free_texture_paths(char **paths)
 bool	only_map_chars(char *line)
 {
 	bool	found_map;
-	size_t	i;
+	int		i;
 	size_t	length;
 
 	found_map = false;
@@ -117,7 +117,7 @@ void	ft_read_textures(char **argv, t_textures *texture)
 		if (!line)
 		{
 			process_texture_raw(texture);
-			free(texture->texture_raw);
+//			free(texture->texture_raw);
 			break ;
 		}
 	}

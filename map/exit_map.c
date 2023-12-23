@@ -6,11 +6,11 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 18:19:17 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/20 13:56:23 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/23 12:37:50 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "map.h"
+#include "map.h"
 
 void	free_init_map(t_map *map)
 {
@@ -50,8 +50,5 @@ void free_map(t_map *map)
                 free(map->map_2d[i]);
             free(map->map_2d);
         }
-
-        // Finalmente, liberar la estructura t_map
-        free(map);
     }
 }

@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:23:38 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/22 19:01:13 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/23 12:08:28 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ typedef struct s_map_color
 	t_color 		*ceil_color;
 }	t_map_color;
 
-//color.
-t_map_color		*init_color(void);
+//color.c
+t_map_color		init_color(t_map_color *color);
 void    		get_color_floor(t_map_color *color, t_textures *texture);
 void			get_color_ceil(t_map_color *color, t_textures *texture);
 void		    ft_check_color(t_map_color *color);

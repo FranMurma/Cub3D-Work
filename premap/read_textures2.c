@@ -6,13 +6,13 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 19:26:09 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/22 19:43:14 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/23 11:30:53 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "texture.h"
 
-void	get_texture_type(t_textures *texture, int index, char *info,
+void	get_texture_type(t_textures *texture, char *info,
 		char **paths)
 {
 	if (ft_strcmp("NO", paths[0]) && texture->paths->north == NULL)

@@ -6,11 +6,10 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:59:29 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/22 20:00:11 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/23 12:37:10 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "texture.h"
 #include "../map/map.h"
 
 bool	are_texture_paths_filled(t_cardinal *paths)
@@ -19,16 +18,8 @@ bool	are_texture_paths_filled(t_cardinal *paths)
 		&& paths->floor && paths->ceil);
 }
 
-t_textures	*init_textures(void)
+t_textures	init_textures(t_textures *texture)
 {
-	t_textures	*texture;
-
-	texture = malloc(sizeof(t_textures));
-	if (!texture)
-	{
-		ft_write("Error\n Allocating memory for map\n");
-		return (NULL);
-	}
 	texture->type = UNKNOWN;
 	texture->path = NULL;
 	texture->texture_raw = NULL;
@@ -42,5 +33,38 @@ t_textures	*init_textures(void)
 	texture->paths->west = NULL;
 	texture->paths->floor = NULL;
 	texture->paths->ceil = NULL;
-	return (texture);
+	return (*texture);
+}
+
+void	free_textures(t_textures *texture)
+{
+	int	i;
+
+	i = 0;
+	if (texture)
+	{
+		if (texture->path)
+			free (texture->path);
+		if (texture->texture_raw)
+			free (texture->texture_raw);
+		if (texture->info)
+		{
+			while (texture->info[i])
+			{
+				free (texture->info[i]);
+				i++;
+			}
+			free (texture->info);
+		}
+		free_cardinals(texture->paths);
+	}
+}
+
+void	free_cardinals(t_cardinal *paths)
+{
+	if (paths)
+	{
+		if (paths->north)
+			free (paths->north);
+	}
 }
