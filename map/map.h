@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:46:20 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/24 16:58:09 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/24 17:27:56 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,8 @@ void	ft_bzero(void *str, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strndup(char *s1, size_t len);
 
-//aux_mapa4.c
+//aux_maps4.c
 char	*ft_strndup(char *s1, size_t len);
 
 // check_lines.c
