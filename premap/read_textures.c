@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 12:57:49 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/24 16:45:09 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/24 17:56:01 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void ft_free_paths(char **paths)
 
 void process_texture_raw(t_textures *texture)
 {
+	int	j;
 	int i;
 	char *info;
 	char **paths;
@@ -37,8 +38,11 @@ void process_texture_raw(t_textures *texture)
 	aux = ft_split(texture->texture_raw, '\n');
 	while (aux[i])
 	{
+		j = 0;
 		textinfo = ft_strdup(aux[i]);
 		paths = ft_split(textinfo, ' ');
+		if (paths[2] && paths[2] != NULL)
+			ft_write_error("Error\nBad data in the paths\n");
 		info = ft_strtrim(paths[1], " ");
 		free(textinfo);
 		get_texture_type(texture, info, paths);
@@ -55,9 +59,7 @@ void process_texture_raw(t_textures *texture)
 	free(aux);
 
 	if (i > 6)
-	{
 		ft_write_error("Error\nBad paths number\n");
-	}
 	if (!are_texture_paths_filled(texture->paths))
 		ft_write_error("Error\ntexture paths are not filled\n");
 }
