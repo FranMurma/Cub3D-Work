@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
+/*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:42:22 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/23 12:14:21 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/24 15:17:46 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,10 @@ t_map	init_map(t_map *map)
 	return (*map);
 }
 
-/******
- * No podemos hacer un free de map_2d, porque es una referencia de map->map_2d.
- * Habra que liberarlo al final del programa.
- * ****/
 void	create_2d(t_map *map)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
 	i = 0;
 	map->map_2d = (char **)malloc((map->max_height) * sizeof(char *));
@@ -37,41 +33,27 @@ void	create_2d(t_map *map)
 		ft_write("Error\nCan't allocate memorry for map 2d\n");
 		free_init_map(map);
 	}
+	map->map_2d[map->max_height] = NULL;
 	while (i < map->max_height)
 	{
 		j = 0;
 		map->map_2d[i] = (char *)malloc((map->max_width) * sizeof(char));
-//		printf("Dirección de memoria de 'map_2d[i]': %p\n", (void *)map_2d[i]);
+		if (!map->map_2d[i])
+			ft_write_error("Error\nCan't allocate memorry for map 2d\n");
+		map->map_2d[i][map->max_width] = '\0';
 		while (j < map->max_width)
 		{
-			map->map_2d[i][j] = '-';
+			map->map_2d[i][j] = ' ';
 			j++;
 		}
 		i++;
 	}
-//	i = 0;
-//	free_init_map(map);
-//	free_map_2d(map, map_2d);
 }
 
 void	handle_slash_en(int *y, int *k, int *x)
 {
 	(*x) = 1;
 	(*y)++;
-	(*k)++;
-}
-
-void	handle_tabs(t_map *map, int y, int *x, int *k)
-{
-	int	i;
-
-	i = 0;
-	while (i < 4 && *x < map->max_width - 1)
-	{
-		map->map_2d[y][(*x)] = '-';
-		(*x)++;
-		i++;
-	}
 	(*k)++;
 }
 
@@ -84,36 +66,22 @@ void	copy_line_to_map(t_map *map)
 	y = 1;
 	x = 1;
 	k = 0;
-	printf("Entro en COPY\n");
 	while (y <= map->max_height - 1 && map->map_raw[k] != '\0')
 	{
 		x = 1;
 		while (x <= map->max_width - 1)
 		{
-			if (map->map_raw[k] != '\n' && map->map_raw[k] != '\0'
-				&& map->map_raw[k] != '\t')
+			if (map->map_raw[k] != '\n' && map->map_raw[k] != '\0')
 				map->map_2d[y][x++] = map->map_raw[k++];
 			else if (map->map_raw[k] == ' ')
 			{
-				map->map_2d[y][x++] = '-';
+				map->map_2d[y][x++] = ' ';
 				k++;
 			}
-			else if (map->map_raw[k] == '\t')
-			{
-				handle_tabs(map, y, &x, &k);
-			}
 			else if (map->map_raw[k] == '\n')
-			{
 				handle_slash_en(&y, &k, &x);
-			}
 			else
-			{
 				break ;
-			}
 		}
 	}
-//	free (map->map_raw);
-	printf("LLEGO\n");
-//	map->map_raw = NULL;
-//	print_filled_map(map);
 }

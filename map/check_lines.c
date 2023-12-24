@@ -6,47 +6,30 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 18:55:13 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/23 11:42:28 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/24 15:59:40 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 
+bool	is_map_char(char c)
+{
+	if (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E'
+		|| c == 'W')
+		return (true);
+	return (false);
+}
+
 bool	skip_whitespace(char *line, int *length)
 {
 	*length = 0;
-	while (line[*length] == ' ' || line[*length] == '\t')
+	while (line[*length] == ' ')
 	{
-		if (line[*length] == '\t')
-		{
-			(*length)++;
-		}
-		else if (line[*length] == ' ')
-		{
-			(*length)++;
-		}
+		(*length)++;
 		if (line[*length] == '\0')
 			return (false);
 	}
 	return (true);
-}
-
-void	start_map(int *length, bool *map_started)
-{
-	*map_started = true;
-	(*length)++;
-}
-
-void	process_other_chars(char *line, int *length)
-{
-	if (line[*length] == '\n' || line[*length] == ' ')
-	{
-		(*length)++;
-	}
-	else if (line[*length] == '\t')
-	{
-		(*length)++;
-	}
 }
 
 bool	is_valid_map_line(char *line)
@@ -56,18 +39,19 @@ bool	is_valid_map_line(char *line)
 
 	length = 0;
 	map_started = false;
-	while (line[length] == ' ' || line[length] == '\t')
+	while (line[length] == ' ')
 		if (!skip_whitespace(line, &length))
 			return (false);
 	while (line[length])
 	{
-		if (line[length] == '0' || line[length] == '1' || line[length] == 'N'
-			|| line[length] == 'S' || line[length] == 'E' || line[length]
-			== 'W')
-			start_map(&length, &map_started);
-		else if ((line[length] == '\n' || line[length] == ' '
-				|| line[length] == '\t') && map_started)
-			process_other_chars(line, &length);
+		if (is_map_char(line[length]))
+		{
+			map_started = true;
+			length++;
+		}
+		else if ((line[length] == '\n' || line[length] == ' ')
+			&& map_started)
+			length++;
 		else
 			return (false);
 	}
@@ -81,16 +65,9 @@ bool	is_valid_line_inside(char *line)
 	length = 0;
 	while (line[length])
 	{
-		if ((line[length] == '0' || line[length] == '1' || line[length] == 'N'
-			|| line[length] == 'S' || line[length] == 'E' || line[length]
-			== 'W' || line[length] == '\n' || line[length] == ' '))
-			{
+		if ((is_map_char(line[length]) || line[length] == '\n'
+				|| line[length] == ' '))
 			length++;
-		}
-		else if (line[length] == '\t')
-		{
-			length++;
-		}
 		else
 			return (false);
 	}

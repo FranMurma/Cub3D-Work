@@ -6,11 +6,11 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:26:04 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/13 15:00:45 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/24 16:22:03 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "map.h"
+#include "map.h"
 
 static int	words_count(char *s, char c)
 {

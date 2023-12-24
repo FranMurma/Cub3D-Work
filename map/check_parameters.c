@@ -3,26 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   check_parameters.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
+/*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:25:22 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/23 12:40:54 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/24 16:57:58 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "map.h"
-# include "../premap/texture.h"
-# include "../premap/color.h"
-# include "../player/player.h"
+#include "map.h"
 
 bool	ft_check_nbr_arguments(int argc)
 {
 	if (argc != 2)
 	{
 		ft_write_error("You should have 2 arguments\n");
-		return(false);
+		return (false);
 	}
-	return(true);
+	return (true);
 }
 
 bool	ft_check_extension(char **argv)
@@ -48,60 +45,10 @@ bool	ft_check_extension(char **argv)
 	return (term[i] == '\0');
 }
 
-void 	ft_check_parameters(int argc, char **argv)
+void	ft_check_parameters(int argc, char **argv)
 {
 	if (!ft_check_nbr_arguments(argc))
 		ft_write_error("Error.\nUsage: ./your_program map.cub");
 	if (!ft_check_extension(argv))
 		ft_write_error("Error.\nThe file should be a .cub");
-}
-
-void	ft_start_map(char **argv)
-{
-	t_textures texture;
-	texture = init_textures(&texture);
-	ft_read_textures(argv, &texture);
-	t_map_color color;
-	color = init_color(&color);
-	ft_check_color(&color);
-	get_color_floor(&color, &texture);
-	get_color_ceil(&color, &texture);
-	t_map	map;
-	map	= init_map(&map);
-	ft_read_map(argv, &map);
-	create_2d(&map);
-	print_filled_map(&map);
-	copy_line_to_map(&map);
-	print_filled_map(&map);
-//	free_map(map);// Bien hasta aqui, libera todo
-//	t_textures *texture;
-//	texture = init_textures();
-//	ft_read_textures(argv, texture);//objeto liberado sin estar allocado
-//	t_player *player;
-//	player = init_player();
-//	get_player(map, player);
-//	t_map_color *color;
-//	color = init_color();
-//	ft_check_color(color);
-//	get_color_floor(color, texture);
-//	get_color_ceil(color, texture);
-//	free_map(map);
-//	free_textures(texture);
-//	free(map->map_raw);
-/*	ft_read_textures(argv, texture);
-    // Procesar y mostrar información de texturas
-    process_texture_raw(texture);*/
-//    printf("\nPaths:\n");
-//    printf("North: %s\n", texture->paths->north);
-//    printf("South: %s\n", texture->paths->south);
-//    printf("West: %s\n", texture->paths->west);
-//    printf("East: %s\n", texture->paths->east);
-//    printf("Floor: %s\n", texture->paths->floor);
-//    printf("Ceil: %s\n", texture->paths->ceil);
-/*	get_color_floor(color, texture);
-	get_color_ceil(color, texture);
-	ft_check_color(color);*/
-	free_map(&map);
-	free_textures (&texture);
-	exit (-1);
 }

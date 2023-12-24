@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   strtrim.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
+/*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:55:13 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/22 13:55:47 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/24 16:20:28 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "map.h"
+#include "map.h"
 
-static int	find_start(char const *s1, char const *set, int len)
+int	find_start(char const *s1, char const *set, int len)
 {
 	int	l_s1;
 
@@ -27,7 +27,7 @@ static int	find_start(char const *s1, char const *set, int len)
 	return (l_s1);
 }
 
-static int	find_end(char const *s1, char const *set, int len)
+int	find_end(char const *s1, char const *set, int len)
 {
 	int	l_s2;
 
@@ -42,7 +42,7 @@ static int	find_end(char const *s1, char const *set, int len)
 	return (l_s2);
 }
 
-static void	complete_str(char *str, char const *s1, int l_s1, int l_s2)
+void	complete_str(char *str, char const *s1, int l_s1, int l_s2)
 {
 	int	c;
 	int	len;

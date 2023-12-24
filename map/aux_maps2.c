@@ -6,16 +6,17 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:45:30 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/22 13:56:30 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/24 17:00:19 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-# include "map.h"
+
+#include "map.h"
 
 void	ft_write(char *message)
 {
-    write(2, message, ft_strlen(message));
-    write(2, "\n", 1);
-    return ;
+	write(2, message, ft_strlen(message));
+	write(2, "\n", 1);
+	return ;
 }
 
 bool	ft_strcmp(char *s1, char *s2)
@@ -25,7 +26,6 @@ bool	ft_strcmp(char *s1, char *s2)
 	cont = 0;
 	if (s1 == NULL || s2 == NULL)
 		return (false);
-
 	while (s1[cont] != '\0')
 	{
 		if (s1[cont] != s2[cont])

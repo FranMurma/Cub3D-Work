@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
+/*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:24:22 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/23 12:08:18 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/24 13:44:18 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,18 @@ void	get_color_floor(t_map_color *color, t_textures *texture)
 		ft_write_error("Error\nBad color numbers\n");
 	color->floor_color->hex = create_hex_color(color->floor_color->r,
 		color->floor_color->g, color->floor_color->b); 
-	printf("Hex color floor: 0x%X\n", color->floor_color->hex);
 }
 
-void	free_colors(char **char_numbers)
+void	free_colors(char **col)
 {
-	free (char_numbers[0]);
-	free (char_numbers[1]);
-	free (char_numbers[2]);
-	free (char_numbers);
+	int i = 0;
+
+	while(col[i])
+	{
+		free(col[i]);
+		i++;
+	}
+	free(col);
 }
 
 void	get_color_ceil(t_map_color *color, t_textures *texture)
@@ -87,7 +90,6 @@ void	get_color_ceil(t_map_color *color, t_textures *texture)
 		ft_write_error("Error\nBad color arguments\n");
 	color->ceil_color->hex = create_hex_color(color->ceil_color->r,
 		color->ceil_color->g, color->ceil_color->b);
-	printf("Hex color ceil: 0x%X\n", color->ceil_color->hex);
 }
 
 void	ft_check_color(t_map_color *color)
@@ -104,7 +106,6 @@ void	ft_check_color(t_map_color *color)
 
 unsigned int	create_hex_color(int r, int g, int b)
 {
-	printf("R: %i  G: %i  B: %i\n", r, g, b);
 	return (
 		((r & 0xff) << 16) +
 		((g & 0xff) << 8) +

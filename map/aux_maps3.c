@@ -6,10 +6,11 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 15:03:57 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/13 15:16:53 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/24 16:59:06 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-# include "map.h"
+
+#include "map.h"
 
 bool	ft_check_comas(char *input)
 {
