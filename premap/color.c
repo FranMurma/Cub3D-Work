@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frmurcia <frmurcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:24:22 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/24 13:44:18 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/29 14:12:22 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ t_map_color	init_color(t_map_color *color)
 	color->floor_color = malloc(sizeof(t_color));
 	color->ceil_color = malloc(sizeof(t_color));
 	if (!color->floor_color || !color->ceil_color)
-	{
-		fprintf(stderr, "Error: Unable to allocate memory for t_color within t_map_color\n");
-		exit(EXIT_FAILURE);
-	}
+		ft_write_error("Error\nUnable to allocate memory for t_color\n");
 	color->floor_color->r = 0;
 	color->floor_color->g = 0;
 	color->floor_color->b = 0;
@@ -54,19 +51,7 @@ void	get_color_floor(t_map_color *color, t_textures *texture)
 	else
 		ft_write_error("Error\nBad color numbers\n");
 	color->floor_color->hex = create_hex_color(color->floor_color->r,
-		color->floor_color->g, color->floor_color->b); 
-}
-
-void	free_colors(char **col)
-{
-	int i = 0;
-
-	while(col[i])
-	{
-		free(col[i]);
-		i++;
-	}
-	free(col);
+			color->floor_color->g, color->floor_color->b);
 }
 
 void	get_color_ceil(t_map_color *color, t_textures *texture)
@@ -89,27 +74,12 @@ void	get_color_ceil(t_map_color *color, t_textures *texture)
 	else
 		ft_write_error("Error\nBad color arguments\n");
 	color->ceil_color->hex = create_hex_color(color->ceil_color->r,
-		color->ceil_color->g, color->ceil_color->b);
+			color->ceil_color->g, color->ceil_color->b);
 }
-
-void	ft_check_color(t_map_color *color)
-{
-	if (color->ceil_color->r < 0 || color->ceil_color->g < 0 ||
-		color->ceil_color->b < 0 || color->ceil_color->r > 255 ||
-		color->ceil_color->g > 255 || color->ceil_color->b > 255 ||
-		color->floor_color->r < 0 || color->floor_color->g < 0 ||
-		color->floor_color->b < 0 || color->floor_color->r > 255 ||
-		color->floor_color->g > 255 || color->floor_color->b > 255)
-		ft_write_error("Error\nBad color number\n");
-}
-
 
 unsigned int	create_hex_color(int r, int g, int b)
 {
-	return (
-		((r & 0xff) << 16) +
-		((g & 0xff) << 8) +
-		(b & 0xff) 
-	);
+	return (((r & 0xff) << 16)
+		+ ((g & 0xff) << 8)
+		+ (b & 0xff));
 }
-

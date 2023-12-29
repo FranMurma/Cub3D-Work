@@ -6,18 +6,19 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:59:29 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/24 12:43:54 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:12:20 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../map/map.h"
 
-bool are_texture_paths_filled(t_cardinal *paths)
+bool	are_texture_paths_filled(t_cardinal *paths)
 {
-	return (paths->north && paths->south && paths->east && paths->west && paths->floor && paths->ceil);
+	return (paths->north && paths->south && paths->east && paths->west
+		&& paths->floor && paths->ceil);
 }
 
-t_textures init_textures(t_textures *texture)
+t_textures	init_textures(t_textures *texture)
 {
 	texture->type = UNKNOWN;
 	texture->path = NULL;
@@ -35,9 +36,9 @@ t_textures init_textures(t_textures *texture)
 	return (*texture);
 }
 
-void free_textures(t_textures *texture)
+void	free_textures(t_textures *texture)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (texture)
@@ -47,7 +48,7 @@ void free_textures(t_textures *texture)
 	}
 }
 
-void free_cardinals(t_cardinal *paths)
+void	free_cardinals(t_cardinal *paths)
 {
 	if (paths)
 	{

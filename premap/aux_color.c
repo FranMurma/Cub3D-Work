@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:28:00 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/14 12:25:18 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:56:26 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,19 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (sign * n);
+}
+
+bool	is_color(int color)
+{
+	if (color >= 0 && color <= 255)
+		return (true);
+	return (false);
+}
+
+void	ft_check_color(t_map_color *color)
+{
+	if (!is_color(color->ceil_color->r) || !is_color(color->ceil_color->g)
+		|| !is_color(color->ceil_color->b) || !is_color(color->floor_color->r)
+		|| !is_color(color->floor_color->g) || !is_color(color->floor_color->b))
+		ft_write_error("Error\nBad color number\n");
 }

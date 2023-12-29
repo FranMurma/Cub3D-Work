@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frmurcia <frmurcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:46:20 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/24 17:27:56 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/29 14:12:16 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ char	*ft_strjoin(char const *s1, char const *s2);
 
 // aux_maps2.c
 void	ft_write(char *message);
-char	*ft_strtrim(char const *s1, char const *set);
 bool	ft_strcmp(char *s1, char *s2);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 void	*ft_memmove(void *dst, const void *src, size_t len);
@@ -102,6 +101,9 @@ char	*concat_str(char *storage, char *buffer, int len_b);
 
 //split
 char	**ft_split(char const *s, char c);
+
+//strtrim.c
+char	*ft_strtrim(char const *s1, char const *set);
 
 //exit_map.c
 void	free_init_map(t_map *map);

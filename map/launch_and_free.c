@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:40:51 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/24 16:58:28 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/29 15:13:36 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,6 @@ void	ft_free_map(t_map *map)
 		}
 		free(map->map_2d);
 	}
-}
-
-void	ft_free_colors(t_map_color *color)
-{
-	if (color->floor_color)
-		free(color->floor_color);
-	if (color->ceil_color)
-		free(color->ceil_color);
 }
 
 void	ft_read_cub(char **argv, t_textures *text, t_map *map)
@@ -79,9 +71,9 @@ void	ft_start_map(char **argv)
 	init_color(&color);
 	init_map(&map);
 	ft_read_cub(argv, &texture, &map);
-	ft_check_color(&color);
 	get_color_floor(&color, &texture);
 	get_color_ceil(&color, &texture);
+	ft_check_color(&color);
 	create_2d(&map);
 	print_filled_map(&map);
 	copy_line_to_map(&map);

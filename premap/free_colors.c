@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   aux_maps4.c                                        :+:      :+:    :+:   */
+/*   free_colors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/13 15:07:20 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/29 14:04:54 by frmurcia         ###   ########.fr       */
+/*   Created: 2023/12/29 13:56:40 by frmurcia          #+#    #+#             */
+/*   Updated: 2023/12/29 15:12:20 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
+#include "color.h"
 
-char	*ft_strndup(char *s1, size_t len)
+void	ft_free_colors(t_map_color *color)
 {
-	char	*new_str;
-	size_t	i;
+	if (color->floor_color)
+		free(color->floor_color);
+	if (color->ceil_color)
+		free(color->ceil_color);
+}
+
+void	free_colors(char **col)
+{
+	int	i;
 
 	i = 0;
-	new_str = malloc(sizeof(char) * (len + 1));
-	if (!new_str)
-		return (NULL);
-	while (s1[i] && i < len)
+	while (col[i])
 	{
-		new_str[i] = s1[i];
+		free(col[i]);
 		i++;
 	}
-	new_str[i] = '\0';
-	return (new_str);
+	free(col);
 }
