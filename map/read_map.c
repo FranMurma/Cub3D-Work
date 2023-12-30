@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:27:50 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/24 16:39:16 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/29 20:03:26 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,24 +87,4 @@ void	set_measures_and_close(t_map *map, int line_number, int fd)
 	}
 	else
 		ft_write_error("Error\nBad map, not only map chars!\n");
-}
-
-void	print_filled_map(t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < map->max_height)
-	{
-		j = 0;
-		while (j < map->max_width)
-		{
-			printf("%c", map->map_2d[i][j]);
-			j++;
-		}
-		i++;
-		printf("\n");
-	}
-	printf("\n");
 }

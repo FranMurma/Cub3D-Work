@@ -6,30 +6,30 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:00:37 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/24 12:48:16 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/12/29 15:54:27 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_H
-#define PLAYER_H
+# define PLAYER_H
 
-#include "../map/map.h"
+# include "../map/map.h"
 
 typedef struct player
 {
-	double px;
-	double py;
-	double dirx;
-	double diry;
-	double plane_x;
-	double plane_y;
-} t_player;
+	double	px;
+	double	py;
+	double	dirx;
+	double	diry;
+	double	plane_x;
+	double	plane_y;
+}	t_player;
 
 // player.c
-void init_player(t_player *player);
-void get_player(t_map *map, t_player *player);
-void get_player_direction(t_map *map, t_player *player, int y, int x);
-bool is_space_around(t_map *map, int x, int y);
-bool check_map(t_map *map);
+void	init_player(t_player *player);
+void	get_player(t_map *map, t_player *player);
+void	get_player_direction(t_map *map, t_player *player, int y, int x);
+bool	is_space_around(t_map *map, int x, int y);
+bool	check_map(t_map *map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 12:58:57 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/29 13:20:07 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/29 17:17:52 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_textures
 	char			*texture_raw;
 	char			**info;
 	t_cardinal		*paths;
+	bool			path_found;
 }	t_textures;
 
 //init_textures.c

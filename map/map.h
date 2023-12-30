@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:46:20 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/29 14:12:16 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/29 19:40:15 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_map
 	int		map_start;
 	int		map_end;
 	bool	found_map;
+	bool	space_found;
 }	t_map;
 
 //check parameters
@@ -41,6 +42,7 @@ bool	ft_check_extension(char **argv);
 void	ft_check_parameters(int argc, char **argv);
 //launch_and_free.c
 void	ft_free_map(t_map *map);
+void	ft_read_cub(char **argv, t_textures *text, t_map *map);
 void	ft_start_map(char **argv);
 
 // map.c
@@ -55,7 +57,6 @@ void	append_line_to_map_raw(t_map *map, char *line, int *line_number);
 void	process_map_line(t_map *map, char *line,
 			int *line_number);
 void	set_measures_and_close(t_map *map, int line_number, int fd);
-void	print_filled_map(t_map *map);
 
 // aux_maps.c
 // // Funciones de libft y el write error con mensaje
@@ -104,10 +105,5 @@ char	**ft_split(char const *s, char c);
 
 //strtrim.c
 char	*ft_strtrim(char const *s1, char const *set);
-
-//exit_map.c
-void	free_init_map(t_map *map);
-void	free_map_2d(t_map *map);
-void	free_map(t_map *map);
 
 #endif

@@ -6,12 +6,12 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:59:44 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/24 17:46:18 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/29 16:05:18 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "player.h"
-# include "../map/map.h"
+#include "player.h"
+#include "../map/map.h"
 
 void	init_player(t_player *player)
 {
@@ -21,8 +21,7 @@ void	init_player(t_player *player)
 	player->diry = 0;
 }
 
-
-void    get_player(t_map *map, t_player *player)
+void	get_player(t_map *map, t_player *player)
 {
 	int	y;
 	int	x;
@@ -47,11 +46,8 @@ void    get_player(t_map *map, t_player *player)
 		}
 		y++;
 	}
-	printf("P = %i\n", p);
 	if (p != 1)
-		ft_write_error("Error\nBad player position (0 players or more than 1)\n");
-	printf("Number of players: %i\n", p);
-	printf("Player position\nX = %i\nY = %i\n", x, y);
+		ft_write_error("Error\nBad player (0 players or more than 1)\n");
 }
 
 void	get_player_direction(t_map *map, t_player *player, int y, int x)
@@ -76,21 +72,16 @@ void	get_player_direction(t_map *map, t_player *player, int y, int x)
 		player->diry = 0;
 		player->dirx = 1;
 	}
-	map->map_2d[y][x] = '0';
+	map->map_2d[(int)(player->py)][(int)(player->px)] = '0';
 	if (!check_map(map))
 		ft_write_error("Error\nThe map is not closed or are spaces inside\n");
-	else
-	{
-		printf("Player direction X axe: %f\n", player->dirx);
-		printf("Player direction Y axe: %f\n", player->diry);
-	}
 }
 
 bool	is_space_around(t_map *map, int y, int x)
 {
 	if (map->map_2d[y - 1][x] == ' ')
 		return (true);
-	else if  (map->map_2d[y + 1][x] == ' ')
+	else if (map->map_2d[y + 1][x] == ' ')
 		return (true);
 	else if (map->map_2d[y][x - 1] == ' ')
 		return (true);
@@ -102,20 +93,20 @@ bool	is_space_around(t_map *map, int y, int x)
 
 bool	check_map(t_map *map)
 {
-	int y;
+	int	y;
 	int	x;
 
 	y = 1;
 	while (y < map->max_height)
 	{
 		x = 1;
-        while (x < map->max_width)
+		while (x < map->max_width)
 		{
 			if (map->map_2d[y][x] == '0' && is_space_around(map, y, x))
-				return (false);  // Si hay un '0' rodeado por ' ', retorna falso
+				return (false);
 			x++;
 		}
 		y++;
 	}
-	return (true);  // Si no se encontraron problemas, retorna verdadero
+	return (true);
 }

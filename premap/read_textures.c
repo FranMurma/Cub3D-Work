@@ -6,10 +6,11 @@
 /*   By: frmurcia <frmurcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 12:57:49 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/29 13:25:58 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/29 20:03:28 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+# include "../map/map.h"
 #include "texture.h"
 
 void	get_texture_type(t_textures *texture, char *info, char **paths)
@@ -101,6 +102,7 @@ void	process_textures(t_textures *texture, char *line)
 {
 	char	*tmp;
 
+	texture->path_found = true;
 	if (!texture->texture_raw)
 		texture->texture_raw = ft_strdup(line);
 	else if (texture->texture_raw)

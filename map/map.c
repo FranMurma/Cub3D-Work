@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:42:22 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/24 15:17:46 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/29 15:32:02 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ void	create_2d(t_map *map)
 	i = 0;
 	map->map_2d = (char **)malloc((map->max_height) * sizeof(char *));
 	if (!map->map_2d)
-	{
-		ft_write("Error\nCan't allocate memorry for map 2d\n");
-		free_init_map(map);
-	}
+		ft_write_error("Error\nCan't allocate memorry for map 2d\n");
 	map->map_2d[map->max_height] = NULL;
 	while (i < map->max_height)
 	{

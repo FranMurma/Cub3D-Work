@@ -6,15 +6,15 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:23:38 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/29 14:01:21 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/29 17:13:30 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLOR_H
 # define COLOR_H
 
-# include "texture.h"
 # include "../map/map.h"
+# include "texture.h"
 
 typedef struct s_color
 {
