@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:00:37 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/29 15:54:27 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/30 12:23:57 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 
 typedef struct player
 {
-	double	px;
-	double	py;
-	double	dirx;
-	double	diry;
+	int		px;
+	int		py;
+	int		dirx;
+	int		diry;
 	double	plane_x;
 	double	plane_y;
 }	t_player;

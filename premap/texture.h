@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 12:58:57 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/29 17:17:52 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/30 12:19:46 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef struct s_textures
 bool			are_texture_paths_filled(t_cardinal *paths);
 t_textures		init_textures(t_textures *texture);
 void			free_textures(t_textures *texture);
-void			free_cardinals(t_cardinal *paths);
 
 // read_textures.c
 void			get_texture_type(t_textures *texture, char *info, char **paths);

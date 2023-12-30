@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:59:29 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/29 15:55:24 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/30 12:00:16 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,5 @@ void	free_textures(t_textures *texture)
 	{
 		if (texture->path != NULL)
 			free(texture->path);
-	}
-}
-
-void	free_cardinals(t_cardinal *paths)
-{
-	if (paths)
-	{
-		if (paths->north)
-			free(paths->north);
-		if (paths->south)
-			free(paths->south);
-		if (paths->ceil)
-			free(paths->ceil);
-		if (paths->floor)
-			free(paths->floor);
-		if (paths->west)
-			free(paths->west);
-		if (paths->east)
-			free(paths->east);
 	}
 }

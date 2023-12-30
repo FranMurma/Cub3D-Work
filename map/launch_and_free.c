@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:40:51 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/30 11:36:43 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/30 12:25:38 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,6 @@
 #include "../premap/texture.h"
 #include "../premap/color.h"
 #include "../player/player.h"
-
-void	ft_free_map(t_map *map)
-{
-	int	i;
-
-	i = 0;
-	if (map->map_raw)
-		free(map->map_raw);
-	if (map->map_2d)
-	{
-		while (i < map->max_height)
-		{
-			free(map->map_2d[i]);
-			i++;
-		}
-		free(map->map_2d);
-	}
-}
 
 void	process_line(t_textures *text, t_map *map, char *line, int *line_number)
 {
@@ -103,10 +85,10 @@ void	print_everything(t_map *map, t_player *player,
 		printf("\n");
 	}
 	printf("----------------------------------------------------\n");
-	printf("Player position on X and Y axes: %f and %f\n",
+	printf("Player position on X and Y axes: %d and %d\n",
 		player->px, player->py);
-	printf("Player direction X axe: %f\n", player->dirx);
-	printf("Player direction Y axe: %f\n", player->diry);
+	printf("Player direction X axe: %d\n", player->dirx);
+	printf("Player direction Y axe: %d\n", player->diry);
 	printf("NO %s\n", texture->paths->north);
 	printf("SO %s\n", texture->paths->south);
 	printf("EA %s\n", texture->paths->east);
@@ -121,7 +103,7 @@ void	ft_start_map(char **argv)
 	t_textures	texture;
 	t_map_color	color;
 	t_map		map;
-//	t_player	player;
+	t_player	player;
 
 	init_textures(&texture);
 	init_color(&color);
@@ -130,17 +112,11 @@ void	ft_start_map(char **argv)
 	get_color_floor(&color, &texture);
 	get_color_ceil(&color, &texture);
 	ft_check_color(&color);
-	create_2d(&map);      /////AQUISALE!!!!!! NO ME LO PUEDO CXREWWE!!!
-//	copy_line_to_map(&map);
-//	init_player(&player);
-//	get_player(&map, &player);
-//	print_everything(&map, &player, &texture, &color);
-	system ("leaks a.out");
+	create_2d(&map);
+	copy_line_to_map(&map);
+	init_player(&player);
+	get_player(&map, &player);
+	print_everything(&map, &player, &texture, &color);
 	free_textures(&texture);
-//	system ("leaks a.out");
-	ft_free_colors(&color);
-//	system ("leaks a.out");
-	ft_free_map(&map);
-//	system ("leaks a.out");
 	exit(1);
 }

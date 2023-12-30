@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:59:44 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/29 16:05:18 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/30 12:29:06 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	get_player_direction(t_map *map, t_player *player, int y, int x)
 		player->diry = 0;
 		player->dirx = 1;
 	}
-	map->map_2d[(int)(player->py)][(int)(player->px)] = '0';
+	map->map_2d[(player->py)][(player->px)] = '0';
 	if (!check_map(map))
 		ft_write_error("Error\nThe map is not closed or are spaces inside\n");
 }
