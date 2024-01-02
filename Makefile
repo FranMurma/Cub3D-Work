@@ -6,16 +6,16 @@
 #    By: rjobert <rjobert@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/29 11:42:59 by rjobert           #+#    #+#              #
-#    Updated: 2023/12/31 14:43:08 by frmurcia         ###   ########.fr        #
+#    Updated: 2024/01/02 11:19:21 by frmurcia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-CC := cc
+CC := gcc
 FLAGS := -Wall -Wextra -Werror
 HEADER = ./include/cub3d.h
 INC = -I ./include/
-GRAPH_COMPILE = -Imlx
+GRAPH_COMPILE = -Imlx -MMD
 GRAPH_LINKING = -L. -lmlx -framework OpenGL -framework Appkit
 
 SRC = main.c events/hooks.c events/moves.c rendering/raycasting.c \
@@ -55,7 +55,7 @@ $(LIBFT):
 
 -include $(DEPS)
 $(NAME): $(OBJS)
-	$(CC) -o $(NAME) $(OBJS) $(GRAPH_LINKING) $(LIBFT_NAME)
+	$(CC) -o $(NAME) $(OBJS) $(LIBFT_NAME) $(GRAPH_LINKING) -fsanitize=address
 
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
@@ -67,7 +67,7 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)/clean
 
 $(OBJS_DIR)%.o: $(SRC_PATH)%.c Makefile $(HEADER)
-	$(CC) $(FLAGS) $(GRAPH_COMPILE) $(INC) -c $< -o $@
+	$(CC) $(FLAGS) $(INC) $(GRAPH_COMPILE) -c $< -o $@
 
 clean:
 	make -C $(MLX_PATH) clean

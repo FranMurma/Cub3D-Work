@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 12:57:49 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/31 14:45:08 by frmurcia         ###   ########.fr       */
+/*   Updated: 2024/01/02 10:24:46 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	get_texture_type(t_textures *texture, char *info, char **paths)
 {
-	printf("paths: %s\n", paths[0]);
 	if (ft_strcmp("NO", paths[0]) && texture->paths->north == NULL)
 		texture->paths->north = ft_strdup(info);
 	else if (ft_strcmp("SO", paths[0]) && texture->paths->south == NULL)
@@ -59,7 +58,7 @@ void	process_texture_raw(t_textures *texture)
 		paths = ft_split(textinfo, ' ');
 		free(textinfo);
 		if (paths[2] && paths[2] != NULL)
-			ft_write_error("Error\nBad data in the paths\n");
+			ft_write_error("Error\nUnrecognized line\n");
 		textinfo = ft_strtrim(paths[1], " ");
 		get_texture_type(texture, textinfo, paths);
 		free(textinfo);
@@ -70,7 +69,7 @@ void	process_texture_raw(t_textures *texture)
 		free(aux[i++]);
 	free(aux);
 	if (!are_texture_paths_filled(texture->paths))
-		ft_write_error("Error\nTexture paths are not filled\n");
+		ft_write_error("Error\nTexture paths not filled\n");
 }
 
 bool	only_map_chars(char *line)

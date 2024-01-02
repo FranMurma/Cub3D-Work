@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 19:26:09 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/31 14:45:10 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/31 17:21:48 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,3 @@ char	*free_spaces(char *str)
 	result[j] = '\0';
 	return (result);
 }
-

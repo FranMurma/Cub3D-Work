@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:24:22 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/31 13:04:26 by frmurcia         ###   ########.fr       */
+/*   Updated: 2024/01/02 10:14:25 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,11 @@ void	get_color_floor(t_map_color *color, t_textures *texture)
 	char	**char_numbers;
 	int		num_elements;
 
-	printf("Entramos en get color\n");
 	num_elements = 0;
 	char_numbers = ft_split(texture->paths->floor, ',');
 	while (char_numbers && char_numbers[num_elements]
 		&& is_numeric(char_numbers[num_elements]))
 		num_elements++;
-	printf("number ele %d\n", num_elements);
 	if (num_elements == 3)
 	{
 		color->floor_color->r = ft_atoi(char_numbers[0]);

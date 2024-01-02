@@ -6,7 +6,7 @@
 /*   By: rjobert <rjobert@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 11:38:57 by rjobert           #+#    #+#             */
-/*   Updated: 2023/12/31 15:25:29 by frmurcia         ###   ########.fr       */
+/*   Updated: 2024/01/02 10:28:38 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ typedef struct s_textures
 	char			**info;
 	t_cardinal		*paths;
 	bool			path_found;
+	int				p_cl;
 }	t_textures;
 
 typedef struct s_color
