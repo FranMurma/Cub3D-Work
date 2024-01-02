@@ -6,16 +6,16 @@
 #    By: rjobert <rjobert@student.42barcelo>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/29 11:42:59 by rjobert           #+#    #+#              #
-#    Updated: 2024/01/02 11:19:21 by frmurcia         ###   ########.fr        #
+#    Updated: 2023/11/29 11:43:02 by rjobert          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-CC := gcc
+CC := cc
 FLAGS := -Wall -Wextra -Werror
 HEADER = ./include/cub3d.h
 INC = -I ./include/
-GRAPH_COMPILE = -Imlx -MMD
+GRAPH_COMPILE = -Imlx
 GRAPH_LINKING = -L. -lmlx -framework OpenGL -framework Appkit
 
 SRC = main.c events/hooks.c events/moves.c rendering/raycasting.c \
@@ -23,8 +23,8 @@ SRC = main.c events/hooks.c events/moves.c rendering/raycasting.c \
  rendering/init_render.c rendering/load_assets.c player/player.c map/aux_maps.c \
  map/check_lines.c map/check_parameters.c map/get_next_line.c map/map.c \
  map/read_map.c premap/aux_color.c premap/color.c premap/init_textures.c \
- premap/read_textures.c premap/read_textures2.c map/get_next_line2.c \
- map/launch_and_free.c premap/free_colors.c clean/exit_clean.c
+ premap/read_textures.c map/get_next_line2.c map/launch_and_free.c \
+ premap/free_colors.c clean/exit_clean.c premap/read_textures2.c
 
 OBJS_DIR = ./objs/
 SRC_PATH = src/
@@ -55,7 +55,7 @@ $(LIBFT):
 
 -include $(DEPS)
 $(NAME): $(OBJS)
-	$(CC) -o $(NAME) $(OBJS) $(LIBFT_NAME) $(GRAPH_LINKING) -fsanitize=address
+	$(CC) -o $(NAME) $(OBJS) $(GRAPH_LINKING) $(LIBFT_NAME)
 
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
@@ -67,7 +67,7 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)/clean
 
 $(OBJS_DIR)%.o: $(SRC_PATH)%.c Makefile $(HEADER)
-	$(CC) $(FLAGS) $(INC) $(GRAPH_COMPILE) -c $< -o $@
+	$(CC) $(FLAGS) $(GRAPH_COMPILE) $(INC) -c $< -o $@
 
 clean:
 	make -C $(MLX_PATH) clean

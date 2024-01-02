@@ -6,11 +6,11 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:59:44 by frmurcia          #+#    #+#             */
-/*   Updated: 2024/01/02 11:27:33 by frmurcia         ###   ########.fr       */
+/*   Updated: 2023/12/14 19:30:43 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+# include "cub3d.h"
 
 void	get_player(t_map *map)
 {

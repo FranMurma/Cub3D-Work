@@ -6,7 +6,7 @@
 /*   By: rjobert <rjobert@student.42barcelo>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 11:38:57 by rjobert           #+#    #+#             */
-/*   Updated: 2024/01/02 10:28:38 by frmurcia         ###   ########.fr       */
+/*   Updated: 2024/01/02 18:18:49 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ typedef struct s_textures
 	char			**info;
 	t_cardinal		*paths;
 	bool			path_found;
-	int				p_cl;
+  int       p_cl;
 }	t_textures;
 
 typedef struct s_color
@@ -247,11 +247,9 @@ bool	ft_check_extension(char **argv);
 void	ft_check_parameters(int argc, char **argv);
 //launch_and_free.c
 void	ft_free_map(t_map *map);
-void    ft_read_more_cub(t_map *map, t_textures *text, int line_number, int fd);
 void	ft_read_cub(char **argv, t_textures *text, t_map *map);
 t_map	ft_start_map(char **argv);
-void    transfer_texture(t_textures *texture, t_map *map,
-		t_map_color *color);
+
 
 // map.c
 t_map	init_map(t_map *map);
@@ -280,7 +278,6 @@ bool	is_map_char(char c);
 bool	skip_whitespace(char *line, int *length);
 bool	is_valid_map_line(char *line);
 bool	is_valid_line_inside(char *line);
-bool    not_allowed_chars(char *str);
 
 // get_next_line
 char	*get_next_line(int fd);
@@ -295,10 +292,11 @@ int		get_storage_len(char *storage);
 char	*concat_str(char *storage, char *buffer, int len_b);
 
 //init_textures.c
-bool			  are_texture_paths_filled(t_cardinal *paths);
+bool			  are_texture_paths_filled(t_textures *text);
 t_textures  init_textures(t_textures *texture);
 void        free_textures(t_textures *texture);
 void        free_mapcolor(t_map_color  *color);
+char        *free_spaces(char *str);
 
 // read_textures.c
 void			get_texture_type(t_textures *texture, char *info, char **paths);
@@ -306,11 +304,6 @@ void			ft_free_paths(char **paths);
 void			process_texture_raw(t_textures *texture);
 bool			only_map_chars(char *line);
 void			process_textures(t_textures *texture, char *line);
-
-// read_textures2.c
-char    *void_free_spaces(char *str);
-char    *process_dir_spaces(char *str, char *result, int *j, int *i);
-char    *free_spaces(char *str);
 
 //player.c
 // t_player	*init_player(void);

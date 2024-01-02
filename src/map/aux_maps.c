@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:59:15 by frmurcia          #+#    #+#             */
-/*   Updated: 2024/01/02 18:06:26 by frmurcia         ###   ########.fr       */
+/*   Updated: 2024/01/02 18:08:00 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ bool	ft_strcmp(char *s1, char *s2)
 	{
 		if (s1[cont] != s2[cont])
 		{
-			printf("Es falso\n");
+			printf("strcmp es V\n");
 			return (false);
 		}
 		cont++;
 	}
-	printf("El compare es Verdadero\n");
+	printf("strcmp es F\n");
 	return (true);
 }
 

@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 19:26:09 by frmurcia          #+#    #+#             */
-/*   Updated: 2023/12/31 17:21:48 by frmurcia         ###   ########.fr       */
+/*   Updated: 2024/01/02 18:56:45 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,17 @@ char	*void_free_spaces(char *str)
 
 char	*process_dir_spaces(char *str, char *result, int *j, int *i)
 {
-	if ((str[*i] == 'N' && str[*i + 1] == 'O')
-		|| (str[*i] == 'S' && str[*i + 1] == 'O')
-		|| (str[*i] == 'W' && str[*i + 1] == 'E')
-		|| (str[*i] == 'E' && str[*i + 1] == 'A'))
+	if (str[*i] && str[*i + 1] && str[*i + 2])
 	{
-		result[(*j)++] = str[(*i)++];
-		result[(*j)++] = str[(*i)++];
-		result[(*j)++] = ' ';
+		if ((str[*i] == 'N' && str[*i + 1] == 'O' && str[*i + 2] == ' ')
+			|| (str[*i] == 'S' && str[*i + 1] == 'O' && str[*i + 2] == ' ')
+			|| (str[*i] == 'W' && str[*i + 1] == 'E' && str[*i + 2] == ' ')
+			|| (str[*i] == 'E' && str[*i + 1] == 'A' && str[*i + 2] == ' '))
+		{
+			result[(*j)++] = str[(*i)++];
+			result[(*j)++] = str[(*i)++];
+			result[(*j)++] = str[(*i)++];
+		}
 	}
 	return (result);
 }

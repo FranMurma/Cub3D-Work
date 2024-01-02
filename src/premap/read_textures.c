@@ -6,7 +6,7 @@
 /*   By: frmurcia <frmurcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 12:57:49 by frmurcia          #+#    #+#             */
-/*   Updated: 2024/01/02 10:24:46 by frmurcia         ###   ########.fr       */
+/*   Updated: 2024/01/02 18:36:40 by frmurcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	get_texture_type(t_textures *texture, char *info, char **paths)
 {
-	if (ft_strcmp("NO", paths[0]) && texture->paths->north == NULL)
+	if (ft_strcmp(paths[0], "NO") && texture->paths->north == NULL)
 		texture->paths->north = ft_strdup(info);
-	else if (ft_strcmp("SO", paths[0]) && texture->paths->south == NULL)
+	else if (ft_strcmp(paths[0], "SO") && texture->paths->south == NULL)
 		texture->paths->south = ft_strdup(info);
-	else if (ft_strcmp("WE", paths[0]) && texture->paths->west == NULL)
+	else if (ft_strcmp(paths[0], "WE") && texture->paths->west == NULL)
 		texture->paths->west = ft_strdup(info);
-	else if (ft_strcmp("EA", paths[0]) && texture->paths->east == NULL)
+	else if (ft_strcmp(paths[0], "EA") && texture->paths->east == NULL)
 		texture->paths->east = ft_strdup(info);
-	else if (ft_strcmp("F", paths[0]) && texture->paths->floor == NULL)
+	else if (ft_strcmp(paths[0], "F") && texture->paths->floor == NULL)
 		texture->paths->floor = ft_strdup(info);
-	else if (ft_strcmp("C", paths[0]) && texture->paths->ceil == NULL)
+	else if (ft_strcmp(paths[0], "C") && texture->paths->ceil == NULL)
 		texture->paths->ceil = ft_strdup(info);
 	else
 		ft_write_error("Error\nUnrecognized line in the file\n");
@@ -56,6 +56,8 @@ void	process_texture_raw(t_textures *texture)
 	{
 		textinfo = free_spaces(aux[i]);
 		paths = ft_split(textinfo, ' ');
+		if (paths[1] == NULL)
+			ft_write_error("Error\nMissing information in line\n");
 		free(textinfo);
 		if (paths[2] && paths[2] != NULL)
 			ft_write_error("Error\nUnrecognized line\n");
@@ -68,7 +70,7 @@ void	process_texture_raw(t_textures *texture)
 	while (aux[i])
 		free(aux[i++]);
 	free(aux);
-	if (!are_texture_paths_filled(texture->paths))
+	if (!are_texture_paths_filled(texture))
 		ft_write_error("Error\nTexture paths not filled\n");
 }
 
